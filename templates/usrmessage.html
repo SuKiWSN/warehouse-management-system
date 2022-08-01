@@ -1,0 +1,343 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户中心</title>
+    <style >
+        @import "../static/home.css";
+    </style>
+</head>
+<body>
+    <div id="top">
+        <ul class="top-ul">
+            <li id="welcome">
+                欢迎{{userName}}来到仓库管理系统
+             </li>
+            <li>
+                <a href="/manage/">首页</a>
+            </li>
+            <li>
+                <form action="/manage/" method="post">
+                    <input type="text" name="usr" value="{{ userCode }}" style="display: none">
+                    <input type="password" name="pwd" value="{{ userPassword }}" style="display: none">
+                    <input type="submit" name="submit" class="gotouser" value="后台管理" style="width: 100%; height: 100%; border: none; background: none; font-size: 100%; color:white; cursor:pointer">
+                </form>
+            </li>
+            <li>
+                <form action="/user/" style="color: white" method="post">
+                    <input type="text" name="usr" value="{{ userCode }}" style="display: none">
+                    <input type="password" name="pwd" value="{{ userPassword }}" style="display: none">
+                    <input type="submit" name="submit" class="gotouser" value="用户中心" style="width: 100%; height: 100%; border: none; background: none; font-size: 100%; color: white; cursor:pointer">
+                </form>
+            </li>
+        </ul>
+    </div>
+    <div class="left">
+        <div>
+            <div>
+                <a id="showme" style="width: 100%;height: 100%" href="javascript:void(0)" onclick="showme()">个人信息</a>
+            </div>
+            <div>
+                <a id="showmima" style="width: 100%;height: 100%" href="javascript:void(0)" onclick="showmima()">修改密码</a>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        <div style=" border: 1px black; border-radius: 5px; background: white">
+        <div class="base1" style="text-align: center">
+            姓名：{{ userName }}
+            <form action="/user/" method="post" style="float:right; margin-right: 20px;" onsubmit="change(1, document.getElementById('name').value)">
+                <input name="pwd" value="{{ userPassword }}" type="password" style="display: none">
+                <input name="usr" value="{{ userCode }}" type="text" style="display: none">
+                <input type="text" id="name" name="name" style="width: 80px; height: 30px;font-size: 16px; border-radius: 2px;border-width: 1px;">
+                <input type="submit" value="修改" style="border: 1px; background: none; width: 30px;height: 20px;border-radius: 2px; color: #0000ff">
+            </form>
+        </div>
+        <div class="base1" id="address">
+            账号：{{ userCode }}
+        </div>
+        <div class="base1">
+            年龄：{{ userAge }}
+            <form action="/user/" method="post" style="float:right; margin-right: 20px;" onsubmit="ChangeAge()">
+                <input name="pwd" value="{{ userPassword }}" type="password" style="display: none">
+                <input name="usr" value="{{ userCode }}" type="text" style="display: none">
+                <input type="date" id="age">
+                <input type="submit" value="修改" style="border: 1px; background: none; width: 30px;height: 20px;border-radius: 2px; color: #0000ff">
+            </form>
+        </div>
+        <div class="base1">
+        <div id="gender" style="display: none">{{ gender }}</div>
+        性别：
+            <select id="changegender" onchange="ChangeGender()" style="border: none; color: black; font-size: 15px; width: 20px;">
+                <option value="1" {% if gender == 1 %}selected="selected"{% endif %}>
+                    女
+                </option>
+                <option value="2" {% if gender == 2 %}selected="selected"{% endif %}>
+                    男
+                </option>
+            </select>
+        </div>
+        <div class="base1">
+            电话：{{ phone }}
+            <form action="/user/" method="post" style="float:right; margin-right: 20px;" onsubmit="change(3, document.getElementById('phone').value)">
+                <input name="pwd" value="{{ userPassword }}" type="password" style="display: none">
+                <input name="usr" value="{{ userCode }}" type="text" style="display: none">
+                <input type="text" id="phone" name="address" style="width: 80px; height: 30px;font-size: 16px; border-radius: 2px;border-width: 1px;">
+                <input type="submit" value="修改" style="border: 1px; background: none; width: 30px;height: 20px;border-radius: 2px; color: #0000ff">
+            </form>
+        </div>
+        <div class="base1">
+            职称：
+            {% if userRole == 3 %}
+                普通员工
+            {% elif userRole == 2 %}
+                经理
+            {% elif userRole == 1 %}
+                系统管理员
+            {% endif %}
+        </div>
+        <div class="base1">
+            地址：{{ address }}
+            <form action="/user/" method="post" style="float:right; margin-right: 20px;" onsubmit="change(2, document.getElementById('afaddress').value)">
+                <input name="pwd" value="{{ userPassword }}" type="password" style="display: none">
+                <input name="usr" value="{{ userCode }}" type="text" style="display: none">
+                <input type="text" id="afaddress" name="address" style="width: 80px; height: 30px;font-size: 16px; border-radius: 2px;border-width: 1px;">
+                <input type="submit" value="修改" style="border: 1px; background: none; width: 30px;height: 20px;border-radius: 2px; color: #0000ff">
+            </form>
+        </div>
+        </div>
+        </div>
+    <div class="right3" style="text-align: center">
+        <div style="margin: auto; width: 600px; height: 200px; position: absolute; top: 0; bottom: 0; left: 0;right: 0">
+            <form action="/user/" onsubmit="return changepwd()" method="post">
+                <input name="pwd" value="{{ userPassword }}" type="password" style="display: none">
+                <input name="usr" value="{{ userCode }}" type="text" style="display: none">
+                <div class="mm">
+                输入密码：<input name="mima" id="1" class="mima" type="password">
+                </div>
+                <div class="mm">
+                确认密码：<input name="queren" id="2" class="mima" type="password">
+                </div>
+                <div class="bas">
+                    <input type="submit" style="height: 100%; width: 100%; font-size: 100%; background: none; border: none;" value="修改">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="message">
+        <div class="ok"></div>
+        <div class="not-ok"></div>
+        <div class="message-pre"></div>
+        <div class="message-box"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script>
+        function change(type, data){
+            usr = localStorage.getItem('usr')
+            $.ajax({
+                async: false,
+                type: 'POST',
+                dataType: 'json',
+                url: '/change/',
+                data:{'usr':usr, 'data':data, 'type': type}
+            })
+        }
+        function ChangeAge(){
+            usr = localStorage.getItem('usr')
+            afage = $("#age").val()
+            console.log(afage)
+            $.ajax({
+                async: false,
+                type: 'POST',
+                dataType: 'json',
+                url: '/changeage/',
+                data:{'usr':usr, 'age': afage},
+                success: function (data){
+                    if(data.message === 1 || data.message === 2){
+                        f = 1;
+                    }
+                }
+            })
+            return true
+        }
+
+        function gotouser(){
+            $(".right").show()
+                $(".right2").show()
+                $(".left").show()
+            $(".left2").css('display', 'none');
+// <!--            $("#gotomanage").css('color', 'black');-->
+// <!--            $("#gotouser").css('color', 'bisque');-->
+        }
+        function gotomanage(){
+            usr = localStorage.getItem('usr')
+            pwd = localStorage.getItem('pwd')
+            var f = 0;
+            $.ajax(
+                {
+                    async: false,
+                    type: 'POST',
+                    dataType: 'json',
+                    url: '/role/',
+                    data:{'usr':usr, 'pwd':pwd},
+                    success: function (data){
+                        if(data.message === 1 || data.message === 2){
+                            f = 1;
+                        }
+                    }
+                }
+            )
+            if(f===1){
+                $(".right").css('display', 'none');
+                $(".right2").css('display', 'none');
+                $(".right3").css('display', 'none');
+                $(".left").css('display', 'none');
+// <!--                $("#gotomanage").css('color', 'bisque');-->
+// <!--            $("#gotouser").css('color', 'black');-->
+            $(".left2").show()
+            }
+            else{
+                $(".message-pre").text('请求失败');
+                $(".message-box").text('用户权限不足');
+                $(".not-ok").show();
+                $(".ok").css('display', 'none');
+                $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+            }
+        }
+        function changeGender(){
+
+            let select = document.createElement('select')
+            select.style.color = 'black';
+            select.style.border = 'none';
+            select.style.width = '20px'
+            select.style.borderRadius = '3px';
+            select.options.add(new Option('女', 1));
+            select.options.add(new Option('男', 2));
+            gender = parseInt(document.getElementById('gender').textContent)-1
+            console.log(gender)
+            select.options[gender].selected = true;
+            select.addEventListener('change', ChangeGender.bind(this), false);
+            base1 = document.getElementsByClassName('base1')[2]
+            base1.textContent = '性别：'
+            base1.appendChild(select)
+        }
+        function ChangeGender(){
+            usr = localStorage.getItem('usr')
+            console.log(usr)
+            $.ajax(
+                {
+                    url: '/changegender/',
+                    dataType: 'json',
+                    type: 'POST',
+                    data: {'usr': usr},
+                    success: function (data){
+                        $(".message-pre").text('请求成功');
+                        $(".message-box").text('性别修改成功');
+                        $(".ok").show();
+                        $(".not-ok").css('display', 'none');
+                        $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+
+                    }
+                }
+            )
+        }
+
+        function showme(){
+            $(".right").show();
+            $(".right2").show();
+            $(".right3").css('display', 'none');
+// <!--            $("#showme").css('color', 'bisque');-->
+// <!--            $("#showmima").css('color', 'black');-->
+var l = document.getElementsByClassName('left')[0].childNodes[1]
+            a = l.childNodes[1]
+            b = l.childNodes[3]
+            a.style.background = 'rgb(16,134,117)';
+            b.style.background = 'rgb(25,22,32)';
+        }
+        function showmima(){
+            $(".right3").show();
+            $(".right").css('display', 'none');
+            $(".right2").css('display', 'none');
+// <!--            $("#showme").css('color', 'black');-->
+// <!--            $("#showmima").css('color', 'bisque');-->
+var l = document.getElementsByClassName('left')[0].childNodes[1]
+            a = l.childNodes[1]
+            b = l.childNodes[3]
+            a.style.background = 'rgb(25,22,32)';
+            b.style.background = 'rgb(16,134,117)';
+        }
+        function start(){
+            var b = document.getElementsByClassName('base1');
+            var address = b[0].textContent;
+            var name = $(".input-group").val();
+            if(name.length===0){
+                $(".message-pre").text('请求失败');
+                $(".message-box").text('昵称不能为空');
+                $(".not-ok").show();
+                $(".ok").css('display', 'none');
+                $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                return false;
+            }
+            var gend = $("#group").val();
+            $.ajax(
+                {
+                    url: '/modify/',
+                    async: false,
+                    dataType: 'json',
+                    type: 'POST',
+                    data: {'name': name, 'gend': gend, 'address': address},
+                }
+            )
+        }
+
+        function changepwd(){
+            var pwd = $("#1").val();
+            var pwd2 = $("#2").val();
+            address = localStorage.getItem('usr')
+            if(pwd !== pwd2){
+                $(".message-pre").text('请求失败');
+                $(".message-box").text('两次密码不正确');
+                $(".not-ok").show();
+                $(".ok").css('display', 'none');
+                $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                return false
+            }
+            else{
+                if(pwd.length < 8 ||pwd.length > 16){
+                    $(".message-pre").text('请求失败');
+                    $(".message-box").text('密码长度不合法');
+                    $(".not-ok").show();
+                    $(".ok").css('display', 'none');
+                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                    return false;
+                }
+                $.ajax({
+                    url: '/changepwd/',
+                    dataType: 'json',
+                    type: 'POST',
+                    data: {'pwd': pwd, 'address': address},
+                    success: function (data){
+                        $(".message-pre").text('请求成功');
+                        $(".message-box").text('密码修改成功');
+                        $(".ok").show();
+                        $(".not-ok").css('display', 'none');
+                        $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                    }
+                })
+            }
+        }
+        function highlight_top(){
+        a = document.getElementsByClassName('top-ul')[0].childNodes[7]
+        a.style.background = 'rgb(16,134,117)'
+    }
+        $(document).ready(
+            highlight_top(),
+            showme()
+        )
+    </script>
+
+</body>
+</html>

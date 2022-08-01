@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理</title>
+    <style>
+        @import "../static/home.css";
+        .b1:hover{
+            background: rgb(166 122 81);
+            box-shadow: goldenrod;
+        }
+        .b1{transition:0.3s;background: goldenrod; float:left; width: 50px; height: 30px}
+    </style>
+</head>
+<body>
+    <div id="top">
+        <ul class="top-ul">
+            <li id="welcome">
+                欢迎{{ userName }}来到仓库管理系统
+            </li>
+            <li>
+                <a href="/manage/">首页</a>
+            </li>
+            <li>
+                <form action="/manage/" method="post">
+                    <input type="text" name="usr" value="{{ userCode }}" style="display: none">
+                    <input type="password" name="pwd" value="{{ userPassword }}" style="display: none">
+                    <input type="submit" name="submit" class="gotouser" value="后台管理" style="width: 100%; height: 100%; border: none; background: none; font-size: 100%; color: white; cursor: pointer">
+                </form>
+            </li>
+            <li>
+                <form action="/user/" style="color: bisque" method="post">
+                    <input type="text" name="usr" value="{{ userCode }}" style="display: none">
+                    <input type="password" name="pwd" value="{{ userPassword }}" style="display: none">
+                    <input type="submit" name="submit" class="gotouser" value="用户中心" style="width: 100%; height: 100%; border: none; background: none; font-size: 100%; color: white; cursor:pointer">
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div class="left2">
+            <div>
+                <div>
+                    <a class="left21" href="javascript: void(0)" onclick="getusers()">人员管理</a>
+                </div>
+                <div>
+                    <a class="left22" href="javascript:void(0)" onclick="adduser_view()">添加账户</a>
+                </div>
+                <div>
+                    <a class="left23" href="javascript:void(0)" onclick="getrechargerecord(0)">仓库管理</a>
+                </div>
+                <div>
+                    <a class="left24" href="javascript: void(0)" onclick="rolemanage(0)">角色管理</a>
+                </div>
+                <div>
+                    <a class="left25" href="javascript:void(0)" onclick="getdepartment();">部门管理</a>
+                </div>
+                <div>
+                    <a class="left26" href="javascript:void(0)" onclick="getalarm(1, 1);">报警信息</a>
+                </div>
+            </div>
+    </div>
+
+    <div class="managediv">
+        <div class="right4">
+            <div>
+                <div class="table" style="margin-top: 100px; height: 500px; overflow-y: scroll; display: none">
+                    <table class="table1" style="width: 95%; border: 10px;" cellspacing="0" cellpadding="0">
+                        <tr style="width: 100%; height: 30px; border: 1px solid red; background-color:#F2F2F2;">
+                            <td>账号</td>
+                            <td>姓名</td>
+                            <td>年龄</td>
+                            <td>电话</td>
+                            <td>密码</td>
+                            <td>地址</td>
+                            <td>性别</td>
+                            <td>职称</td>
+                            <td>部门</td>
+                            <td>操作</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="right42" style="width: 400px">
+                <form action="javascript:void(0)">
+                    <div style="float:left;"><input class="input-group search" style="width: 100px; height: 30px;" type="text" placeholder="输入用户信息查找"></div>
+                    <div style="float:left;">
+                        <select name="dept" id="dept" style="width: 100px; height: 34px; border: 1px solid; color: #bbb; border-radius: 5px; margin-left: 20px;"></select>
+                    </div>
+                    <div class="b1" style="margin-left: 20px; font-size: 100%;"><button style="font-size: 16px; width: 100%; height: 100%; border:none; border-radius: 2px;background: none;float: right" id="b1">搜索</button></div>
+                </form>
+            </div>
+        </div>
+        <div class="right5">
+            <div style="width: 240px; height: 30px; margin-top: 100px; margin-left: 40px;">
+                    <input placeholder="输入账号" type="text" name="userCode" class="input-group in1" style=" height:30px; margin-top: 20px;">
+                    <input placeholder="输入密码" type="text" name="userPassword" class="input-group in2" style="height:30px; margin-top: 20px;">
+                    <input placeholder="输入姓名（选填）" type="text" name="userName" class="input-group in3" style="height:30px; margin-top: 20px;">
+                    <input placeholder="输入电话（选填）" type="text" name="phone" class="input-group in4" style="height:30px; margin-top: 20px;">
+                    <input placeholder="输入地址（选填）" type="text" name="address" class="input-group in5" style="height:30px; margin-top: 20px;">
+                    <select class="in6" style="margin-top: 20px; height:30px;">
+                        <option value="0">选择性别</option>
+                        <option value="2">男</option>
+                        <option value="1">女</option>
+                    </select>
+                    <div class="add_usr" style="margin-top: 20px; margin-left: auto">
+                        <button class="adduser" style=" width: 100%; height:100%; font-size: 100%;">提交</button>
+                    </div>
+            </div>
+        </div>
+        <div class="right6 record-model">
+            <div>
+                <div class="table" style="margin-top: 100px; height: 500px; overflow-y: scroll; display: none">
+                    <table class="table1" style="width: 95%; border: 1px;" cellspacing="0" cellpadding="0">
+                        <tr style="width: 100%; height: 30px; border: 1px; background-color:#F2F2F2;">
+                            <td id="td0">id</td>
+                            <td id="td1">产品编码</td>
+                            <td id="td2">产品名称</td>
+                            <td id="td3">产品类别</td>
+                            <td id="td4">单位</td>
+                            <td id="td5">数量</td>
+                            <td id="td6">总价</td>
+                            <td id="td7">创建日期</td>
+                            <td id="td8">提供者id</td>
+                            <td id="td9">操作</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div style="width: 300px; float:left; margin-top: 20px;">
+                <form action="javascript:void(0)">
+                    <div class="b1" style="margin-left: 20px;" >
+                        <button style="font-size: 100%;width: 100%; height: 100%; border:none; border-radius: 2px;background: none;" id="b2">今日</button>
+                        <button style="font-size: 100%;width: 100%; height: 100%; border:none; border-radius: 2px;background: none; display: none" id="b5">今日</button>
+                    </div>
+                    <div class="b1" style="margin-left: 20px;">
+                        <button style=" font-size: 100%;width: 100%; height: 100%; border:none; border-radius: 2px;background: none;" id="b3">本周</button>
+                        <button style="font-size: 100%;width: 100%; height: 100%; border:none; border-radius: 2px;background: none; display: none" id="b6">本周</button>
+                    </div>
+                    <div class="b1" style="margin-left: 20px;">
+                        <button style=" font-size: 100%;width: 100%; height: 100%; border:none; border-radius: 2px;background: none;" id="b4">本月</button>
+                        <button style="font-size: 100%;width: 100%; height: 100%; border:none; border-radius: 2px;background: none; display: none" id="b7">本月</button>
+                    </div>
+                </form>
+            </div>
+            <div style="width: 60px; height: 20px;margin-right: 20px; margin-top: 20px; float: left; text-align: center"> 合计：</div><div style="width: 40px; height: 20px; text-align: center; margin-right: 20px; margin-top: 20px; float: left" class="showsum"></div>
+            <div style="margin-left: 100px; margin-top: 20px; float: left; width: 20px;"> 元</div>
+            <div style="width: 750px; margin-top: 80px;">
+                <input id="bill1" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px;" placeholder="产品编码">
+                <input id="bill2" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px;" placeholder="产品名称">
+                <input id="bill3" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px;" placeholder="产品类别">
+                <input id="bill4" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px;" placeholder="单位">
+                <input id="bill5" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px;" placeholder="数量">
+                <input id="bill6" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px;" placeholder="总价">
+                <input id="bill7" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px;" placeholder="提供者id">
+                <button class="base4" style="margin-left: 20px; border: none; font-size: 17px;">添加</button>
+            </div>
+        </div>
+
+        <div class="right7 record-model">
+            <div>
+                <div class="table" style="margin-top: 100px; height: 500px; overflow-y: scroll; display: none">
+                    <table class="table1" style="width: 95%; border: 1px;" cellspacing="0" cellpadding="0">
+                        <tr style="width: 100%; height: 30px; border: 1px; background-color:#F2F2F2;">
+                            <td id="td0">id</td>
+                            <td id="td1">角色编码</td>
+                            <td id="td2">角色名称</td>
+                            <td id="td3">创建者id</td>
+                            <td id="td4">创建日期</td>
+                            <td id="td5">操作</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div style="width: 750px; margin-top: 80px;">
+                <input id="role1" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px;" placeholder="角色编码">
+                <input id="role2" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px;" placeholder="角色名称">
+                <button class="base5" style="margin-left: 20px; font-size: 17px;">添加</button>
+            </div>
+        </div>
+
+        <div class="right8">
+            <div>
+                <div class="table" style="margin-top: 100px; height: 500px; overflow-y: scroll; display: none">
+                    <table class="table1" style="width: 95%; border: 1px;" cellspacing="0" cellpadding="0">
+                        <tr style="width: 100%; height: 30px; border: 1px; background-color:#F2F2F2;">
+                            <td id="td0">id</td>
+                            <td id="td1">部门编码</td>
+                            <td id="td2">部门名称</td>
+                            <td id="td3">成员数量</td>
+                            <td id="td4">部门主管</td>
+                            <td id="td4">部门电话</td>
+                            <td id="td6">操作</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div style="width: 750px; margin-top: 80px;">
+                <input id="dept1" class="input-group" style="float: left; width: 200px; margin-left: 20px; height: 30px;" placeholder="部门编码">
+                <input id="dept2" class="input-group" style="float: left; width: 200px; margin-left: 20px; height: 30px;" placeholder="部门名称">
+                <input id="dept3" class="input-group" style="float: left; width: 200px; margin-left: 20px; height: 30px;" placeholder="部门主管">
+                <input id="dept4" class="input-group" style="float: left; width: 200px; margin-left: 20px; height: 30px;" placeholder="部门电话">
+                <button class="base6" style="margin-left: 20px; border: none; font-size: 17px;">添加</button>
+            </div>
+        </div>
+        <div class="right9" style="height: 100%;">
+            <div style="height: 85%;">
+                <div class="table" style="margin-top: 100px; height: 100%; display: none; color: #aaaaaa;">
+                    <table class="fsdffs2" style="background: rgb(22, 22, 22); width: 95%; border: 1px;margin: auto; border: 1px solid #222020; width: 95%;" cellspacing="0" cellpadding="0">
+                        <tr style="width: 100%; height: 30px; background-color:#F2F2F2;" cellspacing="0" cellpadding="0">
+                            <td><div style="margin: auto"><a class="pro1" href="javascript:void(0);" onclick="getalarm(1, 1)" style="color: #aaaaaa;">未处理</a></div></td>
+                            <td><div><a class="pro2" href="javascript:void(0);" onclick="getalarm(2, 1)" style="color: #aaaaaa">已处理</a></div></td>
+                            <td><div><a class="pro2" href="javascript:void(0);" onclick="getalarm(3, 1)" style="color: #aaaaaa">正常</a></div></td>
+                            <td><div style="width: 92%"><a class="pro2" href="javascript:void(0);" onclick="getalarm(4, 1)" style="color: #aaaaaa">异常</a></div></td>
+                        </tr>
+                    </table>
+                    <div style="height: 80%;">
+                    <table class="fsdffs" style="width: 95%; border: 1px;" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td id="td-1">选择</td>
+                            <td id="td0" style="margin-bottom: 1px;">id</td>
+                            <td id="td1">报警编号</td>
+                            <td id="td2">设备编号</td>
+                            <td id="td3">设备名称</td>
+                            <td id="td4">报警日期</td>
+                            <td id="td5">报警类型</td>
+                            <td id="td6" style="width: 20%">操作</td>
+                        </tr>
+                    </table>
+                </div>
+                    <div style="width: 400px; height: 30px; margin-left: 54px; margin-top: 20px; float: left">
+                        <div style="width: 10px; float: left">
+                            <input id="selectall" type="checkbox" style="margin-top: 10px;" name="all" onclick="selectall();">
+                        </div>
+                        <form method="post" onsubmit="return multiop()">
+                            <input type="text" name="usr" value="{{ userCode }}" style="display: none">
+                            <input type="password" name="pwd" value="{{ userPassword }}" style="display: none">
+                            <div style="width: 150px; float: left; margin-left: 20px;">
+                                <select class="select-multiop" style="width: 100%; float: left; text-align: center">
+                                    <option value="0">选择批量操作</option>
+                                    <option value="1">批量删除</option>
+                                    <option value="2">批量设置正常</option>
+                                    <option value="3">批量设置异常</option>
+                                </select>
+                            </div>
+                            <div style="width: 50px; height: 30px; float: left; margin-left: 20px; margin-top: 2px;">
+                            <input type="submit" style="background: gray; color: white; border: 1px solid #676363; border-radius: 2px; width: 100%; height: 100%; font-size: 14px; ">
+                        </div>
+                        </form>
+                    </div>
+                    <div style="width: 200px; height: 30px; margin-top: 20px;float: left;">
+                        <div style="width: 100%; height: 100%; column-count: 3">
+                            <a class="last" onclick="last()" href="javascript:void(0)" style="color: dodgerblue; float: left;">
+                                上一页
+                            </a><br>
+                            <div style="margin: auto; width:60px; height:30px;"><select onchange="getalarm(parseInt(document.getElementsByClassName('type')[0].textContent), select.selectedIndex+1)" id="select-page" style="width: 100%; height: 100%;"></select></div>
+                            <a class="next" onclick="next()" href="javascript:void(0)" style="color: dodgerblue; float: right;">
+                                下一页
+                            </a>
+                            <div class="nowpage" style="display: none"></div>
+                            <div class="pages" style="display: none"></div>
+                            <div class="type" style="display: none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="message">
+        <div class="ok"></div>
+        <div class="not-ok"></div>
+        <div class="message-pre"></div>
+        <div class="message-box"></div>
+    </div>
+    <div class="cover" style="display: none; background: black; opacity: 0.8; position: fixed; width: 100%; height: 100%; margin: auto; left: 0; top: 0; right: 0; bottom: 0;">
+        <div style="position: absolute; right: 0;top: 0; height: 100px;width: 100px;">
+            <button class="closepic" style="width: 100%; height: 100%; border: none; background: none;"><div class="error"></div></button>
+        </div>
+        <div class="judge" style="width: 600px; margin: auto; position: absolute;bottom: 100px; left: 0; right: 0">
+            <div style="float: left; margin-left: 100px; width: 100px; height: 30px;">
+                <button class="yes" style="width: 100%; height: 100%; font-size: 17px;">
+                    正常
+                </button>
+            </div>
+            <div style="float: right; margin-right: 100px; width: 100px;height: 30px;">
+                <button class="danger" style="width: 100%; height: 100%; font-size: 17px;">
+                    异常
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="showdetail" style="position: fixed; left: -9999px; height:500px;"></div>
+    <input type="text" class="getyesordanger" style="display: none">
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script>
+
+    function multiop(){
+        list = []
+        table = document.getElementsByClassName('fsdffs')[0].childNodes
+        for(i=2;i<table.length;i++){
+            tr = table[i]
+            td = tr.childNodes[0]
+            checkbox = td.childNodes[0]
+            if(checkbox.checked){list.push(checkbox.name)}
+        }
+        if(!list.length){
+            $(".message-pre").text('请求失败');
+            $(".message-box").text('请选择处理内容');
+            $(".not-ok").show();
+            $(".ok").css('display', 'none');
+            $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+            select.options[0].selected = 'selected';
+            return false;
+        }
+        type = document.getElementsByClassName('select-multiop')[0].selectedIndex
+        usr = localStorage.getItem('usr')
+        $.ajax({
+            url: '/multiop/',
+            type: 'POST',
+            dataType: 'json',
+            traditional: true,
+            data: {'type': type, 'list': list, 'usr': usr},
+            success: function(data){
+                if(data.code===200){
+                    $(".message-pre").text('请求成功');
+                    $(".message-box").text('批量处理成功');
+                    $(".ok").show();
+                    $(".not-ok").css('display', 'none');
+                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+
+                    type = parseInt(document.getElementsByClassName('type')[0].textContent)
+                    nowpage = parseInt(document.getElementsByClassName('nowpage')[0].textContent)
+                    getalarm(type, nowpage);
+                    document.getElementById('selectall').checked = false;
+                    select = document.getElementsByClassName('select-multiop')[0]
+                    select.options[0].selected = true;
+
+                }
+                else if(data.code === 400){
+                    $(".message-pre").text('请求失败');
+                    $(".message-box").text('操作类型错误');
+                    $(".not-ok").show();
+                    $(".ok").css('display', 'none');
+                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                }
+            }
+        })
+        return false;
+    }
+
+    function selectall(){
+        f = 1;
+        table = document.getElementsByClassName('fsdffs')[0].childNodes
+        for(i=2;i<table.length;i++){
+            tr = table[i]
+            td = tr.childNodes[0]
+            checkbox = td.childNodes[0]
+            if(!(checkbox.checked)){f = 0}
+        }
+        if (f===1){
+            console.log(f)
+            for(i=2;i<table.length;i++){
+                tr = table[i]
+                td = tr.childNodes[0]
+                checkbox = td.childNodes[0]
+                checkbox.checked = false;
+                tr = checkbox.parentNode.parentNode
+                tds = tr.childNodes
+                for (x = 0; x < tds.length; x++) {
+                    tds[x].style.background = 'rgb(33, 33, 33)'
+                }
+            }
+        }
+        else{
+            for(i=2;i<table.length;i++){
+                tr = table[i]
+                td = tr.childNodes[0]
+                checkbox = td.childNodes[0]
+                checkbox.checked = true;
+                tr = checkbox.parentNode.parentNode
+                tds = tr.childNodes
+                for (x = 0; x < tds.length; x++) {
+                    tds[x].style.background = 'rgb(32, 73, 102)'
+                }
+            }
+        }
+    }
+
+    function last(){
+        nowpage = parseInt(document.getElementsByClassName('nowpage')[0].textContent);
+        type = parseInt(document.getElementsByClassName('type')[0].textContent);
+        getalarm(type, nowpage-1)
+        nowpage = parseInt(document.getElementsByClassName('nowpage')[0].textContent);
+        if(nowpage === 1){document.getElementsByClassName('last')[0].style.display = 'none';}
+        if(nowpage !== 1){
+            document.getElementsByClassName('next')[0].style.display = 'block'
+        }
+    }
+    function next(){
+        nowpage = parseInt(document.getElementsByClassName('nowpage')[0].textContent);
+        type = parseInt(document.getElementsByClassName('type')[0].textContent);
+        pages = parseInt(document.getElementsByClassName('pages')[0].textContent)
+        getalarm(type, nowpage+1)
+        nowpage = parseInt(document.getElementsByClassName('nowpage')[0].textContent);
+        if(nowpage === pages){document.getElementsByClassName('next')[0].style.display = 'none';console.log(pages, nowpage)}
+        if(nowpage !== 1){
+            document.getElementsByClassName('last')[0].style.display = 'block'
+        }
+    }
+    $(".base6").click(function(){
+        deptCode = $("#dept1").val();
+        deptName = $("#dept2").val();
+        deptManager = $("#dept3").val();
+        deptPhone = $("#dept4").val();
+        $.ajax({
+            url: '/adddept/',
+            type: 'POST',
+            dataType: 'json',
+            data: {'deptCode': deptCode, 'deptName': deptName, 'deptManager': deptManager, 'deptPhone': deptPhone},
+            success: function (data){
+                if (data.code === 200){
+                    $(".message-pre").text('请求成功');
+                    $(".message-box").text('添加成功');
+                    $(".ok").show();
+                    $(".not-ok").css('display', 'none');
+                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                    getdepartment()
+
+                    for(k=1;k<=4;k++){
+                        document.getElementById("dept"+k).value = ''
+                    }
+                }
+            }
+        })
+    })
+
+    $(".closepic").click(function(){
+        document.body.removeChild(document.getElementsByTagName('img')[0]);
+        document.getElementsByClassName('cover')[0].style.display = 'none';
+        document.getElementsByClassName('showdetail')[0].style = "position: fixed; left: -9999px; height: 500px; width: 300px;"
+        ul = document.getElementsByClassName('showdetail')[0].childNodes
+        for(i=ul.length-1;i>=0;i--){document.getElementsByClassName('showdetail')[0].removeChild(ul[i]);}
+
+    })
+    $(".yes").click(function(){
+        id = $(".getyesordanger").val();
+        process(0, id)
+    })
+    $(".danger").click(function(){
+        id = $(".getyesordanger").val();
+        process(1, id)
+    })
+
+    function process(type, id){
+        usr = localStorage.getItem('usr');
+        $.ajax({
+            url: '/processalarm/',
+            type: 'POST',
+            dataType: 'json',
+            data: {'id': id, 'type': type, 'usr': usr},
+            success: function (data){
+                $(".message-pre").text('请求成功');
+                $(".message-box").text('处理成功');
+                $(".ok").show();
+                $(".not-ok").css('display', 'none');
+                $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                nowpage = parseInt(document.getElementsByClassName('nowpage')[0].textContent);
+                getalarm(1, nowpage)
+                document.body.removeChild(document.getElementsByTagName('img')[0]);
+                document.getElementsByClassName('cover')[0].style.display = 'none';
+            }
+        })
+    }
+
+    function getalarm(type, page){
+        console.log(type, page);
+        document.getElementsByClassName('type')[0].textContent = type;
+        document.getElementsByClassName('nowpage')[0].textContent = page;
+        document.getElementById('selectall').checked = false;
+        if(page === 1){document.getElementsByClassName('last')[0].style.display = 'none';}
+
+        var l = document.getElementsByClassName('left2')[0].childNodes[1];
+        for(i=1;i<l.childNodes.length/2;i++){
+            if(2*i-1==11){
+                l.childNodes[2*i-1].style.background = 'rgb(16,134,117)';
+            }
+            else{
+                l.childNodes[2*i-1].style.background = 'rgb(25,22,32)';
+            }
+        }
+
+        $(".right4").css('display', 'none');
+        $(".right5").css('display', 'none');
+        $(".right6").css('display', 'none');
+        $(".right9").show()
+        $(".right8").css('display', 'none');
+        $(".right7").css('display', 'none');
+
+        $.ajax({
+            async: false,
+            url: '/getalarm/',
+            type: 'POST',
+            dataType: 'json',
+            data: {'type': type, 'page': page},
+            success: function (data){
+                select = document.getElementsByClassName('select-multiop')[0]
+                select.options[0].selected = true;
+                
+                content = data.content;
+                document.getElementsByClassName('pages')[0].textContent = data.pages;
+                if(data.pages > 1 && page < data.pages){document.getElementsByClassName('next')[0].style.display = 'block';}
+                else{document.getElementsByClassName('next')[0].style.display = 'none';}
+                select = document.getElementById('select-page')
+                for(i=select.childNodes.length-1; i>=0; i--){
+                    select.removeChild(select.childNodes[i]);
+                }
+                for(var i=0; i<data.pages; i++){
+                    let option = document.createElement('option');
+                    option.value = i+1
+                    option.textContent = "第" + (i+1) + "页"
+                    select.appendChild(option);
+                }
+                select.options[page-1].selected = true;
+                if(page !== 1 && page <= data.pages){document.getElementsByClassName('last')[0].style.display = 'block';}
+
+                table = document.getElementsByClassName('fsdffs')[0]
+                document.getElementsByClassName('showdetail')[0].style = "position: fixed; left: -9999px; height: 500px; width: 300px;"
+
+                for (i=table.childNodes.length-1;i>1;i--){
+                    table.removeChild(table.lastChild);
+                }
+                for(i=0;i<content.length;i++){
+                    let tr = document.createElement('tr');
+                    let td2 = document.createElement('td');
+                    let check = document.createElement('input')
+                    check.type = 'checkbox'
+                    check.name = content[i][0]
+                    check.onclick = function(){
+                        tr = check.parentNode.parentNode
+                        tds = tr.childNodes
+                        if(check.checked) {
+                            for (x = 0; x < tds.length; x++) {
+                                tds[x].style.background = 'rgb(32, 73, 102)'
+                            }
+                        }
+                        else{
+                            for (x = 0; x < tds.length; x++) {
+                                tds[x].style.background = 'rgb(33, 33, 33)'
+                            }
+                        }
+                    }
+
+
+                    td2.appendChild(check);
+                    tr.appendChild(td2);
+
+                    for(j=0;j<content[i].length;j++){
+                        let td = document.createElement('td')
+                        td.textContent = content[i][j];
+                        tr.appendChild(td)
+                    }
+                    let a = document.createElement('a')
+                    a.href = "javascript:void(0)"
+                    a.style.color = 'rgb(90,114,208)'
+                    if(type === 1) {
+                        a.textContent = '去处理'
+                        a.onclick = function () {
+                            id = parseInt(a.parentNode.parentNode.childNodes[1].textContent)
+                            document.getElementsByClassName('getyesordanger')[0].value = id
+                            document.getElementsByClassName('getyesordanger')[0].value = id
+                            $.ajax({
+                                url: '/showpicture/',
+                                type: 'POST',
+                                dataType: 'json',
+                                data: {'id': id},
+                                success: function (data) {
+                                    let img = document.createElement('img')
+                                    img.src = "data:image/png;base64," + data.data
+                                    img.style = 'margin: auto; position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 1'
+                                    document.body.appendChild(img)
+                                    $(".cover").show()
+                                    procbtn(1)
+                                }
+                            })
+                        }
+                    }
+                    else if(type === 2 || type === 3 || type === 4) {
+                        a.textContent = '查看详情'
+                        usr = localStorage.getItem('usr')
+                        a.onclick = function() {
+                            id = parseInt(a.parentNode.parentNode.childNodes[1].textContent)
+                            $.ajax({
+                                url: '/getdetail/',
+                                type: 'POST',
+                                dataType: 'json',
+                                data: {'id': id, 'usr': usr},
+                                success: function(data) {
+                                    let img = document.createElement('img')
+                                    img.src = "data:image/png;base64," + data.data
+                                    img.style = 'margin: auto; position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 1'
+                                    document.body.appendChild(img)
+                                    $(".cover").show()
+                                    procbtn(0)
+
+                                    let ul = document.createElement('ul')
+                                    ul.style = "width: 200px; height: 800px; margin-right: 20px; margin-top: 0; margin-bottom: 0; display: fixed"
+                                    ul.className = 'detail-ul';
+                                    content = data.content
+                                    for(j=0;j<content.length;j++) {
+                                        if(j===0){str = "报警编号:" +  content[j]}
+                                        else if(j===1){str = "设备编号:" + content[j]}
+                                        else if(j===2){str = "设备名称:" + content[j]}
+                                        else if(j===3){str = "报警日期:" + content[j]}
+                                        else if(j===4){str = "报警类型:" + content[j]}
+                                        else if(j===5){str = "处理日期:" + content[j]}
+                                        else if(j===6){str = "处理状态:" + "已处理"}
+                                        else if(j===7){console.log(content[j], typeof(content[j])); str = "处理结果:"; if(content[j]===0){str += "正常";}else if (content[j]===1){str += "异常"}}
+                                        else if(j===8){str = "处理人:" +content[j]}
+                                        let li = document.createElement('li')
+                                        li.innerHTML = str
+                                        li.style = 'color: white; font-size: 16px; margin-top: 10px;'
+                                        ul.appendChild(li)
+                                    }
+                                    document.getElementsByClassName('showdetail')[0].appendChild(ul)
+                                    document.getElementsByClassName('showdetail')[0].style = "position: fixed; right: 40px; top: 250px; height: 500px; width: 300px;"
+                                }
+                            })
+                        }
+                    }
+                    let td = document.createElement('td')
+                    td.appendChild(a)
+                    let a2 = document.createElement('a')
+                    a2.innerHTML = '删除'
+                    a2.style = "margin-left: 30px; color: red"
+                    a2.href = 'javascript:void(0)'
+                    a2.onclick = function(){
+                        id = parseInt(a.parentNode.parentNode.childNodes[1].textContent)
+                        $.ajax({
+                            url: '/deletealarm/',
+                                type: 'POST',
+                                dataType: 'json',
+                                data: {'id': id},
+                                success: function(data){
+                                if(data.code === 200){
+                                    $(".message-pre").text('请求成功');
+                                    $(".message-box").text('删除成功');
+                                    $(".ok").show();
+                                    $(".not-ok").css('display', 'none');
+                                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                    getalarm(type, page)
+                                }
+                                }
+                            }
+                        )
+                    }
+                    td.appendChild(a2)
+                    tr.appendChild(td)
+                    table.appendChild(tr)
+                }
+            }
+        })
+        t = document.getElementsByClassName('fsdffs2')[0]
+        t = t.childNodes[1].childNodes[0]
+        for(j=1;j<t.childNodes.length;j+=2){
+                    if(j===2*type-1){
+                        t.childNodes[j].childNodes[0].style.background = 'rgb(32, 73, 102)'
+                    }
+                    else{
+                        t.childNodes[j].childNodes[0].style.background = 'rgb(33, 33, 33)';
+                    }
+                }
+    }
+    function procbtn (type){
+        if(type===0){
+            $(".yes").css("display","none");
+            $(".danger").css("display","none");
+        }
+        else if(type===1){
+            $(".yes").show()
+            $(".danger").show()
+        }
+    }
+
+
+    $(".base5").click(function (){
+        roleCode = $("#role1").val()
+        roleName = $("#role2").val()
+        usr = localStorage.getItem('usr')
+        pwd = localStorage.getItem('pwd')
+        $.ajax({
+            url: '/addrole/',
+            type: 'POST',
+            dataType: 'json',
+            data: {'userCode': usr, 'userPassword': pwd, 'roleCode': roleCode, 'roleName': roleName},
+            success: function (data){
+                if(data.code === 200){
+                    $(".message-pre").text('请求成功');
+                    $(".message-box").text('添加成功');
+                    $(".ok").show();
+                    $(".not-ok").css('display', 'none');
+                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                    rolemanage(0)
+                    document.getElementById('role1').value = ''
+                    document.getElementById('role2').value = ''
+                }
+                else{
+                    $(".message-pre").text('请求失败');
+                    $(".message-box").text('添加失败');
+                    $(".not-ok").show();
+                    $(".ok").css('display', 'none');
+                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                }
+            }
+        })
+    })
+    $(".base4").click(function (){
+        usr = localStorage.getItem('usr')
+        billCode = $("#bill1").val()
+        billName = $("#bill2").val()
+        billDesc = $("#bill3").val()
+        billUnit = $("#bill4").val()
+        billCount = $("#bill5").val()
+        billPrice = $("#bill6").val()
+        billPrivider = $("#bill7").val()
+        $.ajax(
+            {
+                url: '/addbill/',
+                type: 'POST',
+                dataType: 'json',
+                data: {'usr': usr, 'billCode': billCode, 'billName': billName, 'billDesc': billDesc, 'billUnit': billUnit, 'billCount': billCount, 'billPrice': billPrice, 'billProvider': billPrivider},
+                success: function (data){
+                    if(data.message === 'success'){
+                            $(".message-pre").text('请求成功');
+                            $(".message-box").text('添加成功');
+                            $(".ok").show();
+                            $(".not-ok").css('display', 'none');
+                            $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                            getrechargerecord(0)
+                        for(i=1;i<=7;i++){
+                            document.getElementById("bill"+i).value = ''
+                        }
+                        }
+                        $(".showsum").text(data.sum);
+            }
+            }
+        )
+    })
+    $("#b5").click(function (){getconsumerecord(1);})
+    $("#b6").click(function (){getconsumerecord(2);})
+    $("#b7").click(function (){getconsumerecord(3);})
+    $(".base3").click(function(){
+        for(j=1;j<=3;j++){
+        x = document.getElementsByClassName('g'+ j)[0].childNodes
+        for(i=1;i<x.length;i++){
+            document.getElementsByClassName('g' + j)[0].removeChild(x[i]);
+        }
+        a = document.getElementsByClassName('givememoney')[0];
+        a.style.display = 'none';
+    }})
+
+    function getdepartment(){
+        $(".right4").css('display', 'none');
+        $(".right5").css('display', 'none');
+        $(".right6").css('display', 'none');
+        $(".right9").css('display', 'none');
+        $(".right8").show()
+        $(".right7").css('display', 'none');
+
+        userCode = localStorage.getItem('usr');
+        userPassword = localStorage.getItem('pwd');
+        var l = document.getElementsByClassName('left2')[0].childNodes[1];
+        for(i=1;i<l.childNodes.length/2;i++){
+            if(2*i-1==9){
+                l.childNodes[2*i-1].style.background = 'rgb(16,134,117)';
+            }
+            else{
+                l.childNodes[2*i-1].style.background = 'rgb(25,22,32)';
+            }
+        }
+        $.ajax({
+            type: "POST",
+            url: "/getdepartment/",
+            dataType: 'json',
+            data: {'userCode': userCode, userPassword},
+            success: function(data){
+                var ta = document.getElementsByClassName('table1')[3].childNodes;
+                var t = document.getElementsByClassName('table1')[3]
+                for(i=ta.length-1;i>1;i--){
+                    t.removeChild(ta[i]);
+                }
+                if (data.code == 200){
+                    list= data.content;
+                    for(i=0;i<list.length;i++){
+                        let tr = document.createElement('tr')
+                            for(j=0;j<list[i].length;j++){
+                                console.log(list[i][j], list[i].length);
+                                let td = document.createElement('td')
+                                if(j == 0 || j == 3){td.textContent = list[i][j];}
+                                else {
+                                    let form = document.createElement('form')
+                                    form.method = 'post'
+                                    form.action = '/manage/'
+                                    let input = document.createElement('input')
+                                    input.value = list[i][j]
+                                    input.style.width = '80%'
+                                    input.style.height = '100%'
+                                    input.style.fontSize = '17px'
+                                    input.style.background = 'none'
+                                    input.style.border = 'none';
+                                    input.style.color = '#000000';
+                                    input.type = 'text'
+                                    input.name = 'data'
+                                    form.appendChild(input)
+                                    let usr = document.createElement('input')
+                                    usr.type = 'text'
+                                    usr.value = localStorage.getItem('usr')
+                                    usr.name = 'usr'
+                                    usr.style.display = 'none'
+                                    let pwd = document.createElement('input')
+                                    pwd.type = 'password'
+                                    pwd.value = localStorage.getItem('pwd')
+                                    pwd.name = 'pwd'
+                                    pwd.style.display = 'none'
+                                    form.appendChild(usr);
+                                    form.appendChild(pwd);
+
+                                    let type = document.createElement('input');
+                                    type.value = j;
+                                    type.style.display = 'none'
+                                    form.appendChild(type)
+                                    td.appendChild(form)
+                                    form.onsubmit = function () {
+                                        var id = this.parentNode.parentNode.childNodes[0].textContent
+                                        var type = this.childNodes[3].value
+                                        var data = input.value
+                                        $.ajax(
+                                            {
+                                                url: '/mdfdept/',
+                                                type: 'POST',
+                                                dataType: 'json',
+                                                async: true,
+                                                data: {'id': id, 'type': type, 'data': data},
+                                                success: function (data) {
+                                                    if (data.code === 200) {
+                                                        $(".message-pre").text('请求成功');
+                                                        $(".message-box").text('修改成功');
+                                                        $(".ok").show();
+                                                        $(".not-ok").css('display', 'none');
+                                                        $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                    }
+                                                    else{
+                                                        $(".message-pre").text('请求失败');
+                                                        $(".message-box").text('字符最大长度：15');
+                                                        $(".not-ok").show();
+                                                        $(".ok").css('display', 'none');
+                                                        $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                    }
+                                                }
+                                            }
+                                        )
+                                        return false
+                                    }
+
+
+                                    let button = document.createElement('input')
+                                    button.type = 'submit'
+                                    button.name = 'submit'
+                                    button.style.position = 'absolute'
+                                    button.style.left = '-9999px'
+                                    form.appendChild(button)
+                                }
+                                tr.appendChild(td)
+                            }
+                        let td = document.createElement(('td'))
+                        let btn = document.createElement('button')
+                                btn.className = 'deletes';
+                                btn.id = 'delete'+i;
+                                btn.style.width = '45%';
+                                btn.style.height = '40px';
+                                btn.style.float = 'left';
+                                btn.style.border = 'none';
+                                btn.style.borderRadius = '3px';
+                                btn.style.boxShadow = '2px 2px gray';
+                                btn.style.textAlign = 'center';
+                                btn.textContent = '删除';
+                                btn.style.fontSize = '100%';
+                                btn.style.background = 'goldenrod';
+                                btn.style.marginLeft = '2%';
+                                btn.onclick = function (){
+                                    this.style.display = 'none';
+                                    let btn2 = document.createElement('button')
+                                    btn2.className = 'deletes';
+                                    btn2.id = 'delete'+i;
+                                    btn2.style.width = '45%';
+                                    btn2.style.height = '40px';
+                                    btn2.style.float = 'left';
+                                    btn2.style.border = 'none';
+                                    btn2.style.borderRadius = '3px';
+                                    btn2.style.boxShadow = '2px 2px gray';
+                                    btn2.textContent = '确认';
+                                    btn2.style.textAlign = 'center';
+                                    btn2.style.fontSize = '100%';
+                                    btn2.style.background = 'red';
+                                    btn2.style.marginLeft = '2%';
+                                    td.appendChild(btn2);
+                                    let btn3 = document.createElement('button')
+                                    btn3.className = 'deletes';
+                                    btn3.id = 'delete'+i;
+                                    btn3.style.width = '45%';
+                                    btn3.style.height = '40px';
+                                    btn3.style.float = 'left';
+                                    btn3.style.border = 'none';
+                                    btn3.style.borderRadius = '3px';
+                                    btn3.style.boxShadow = '2px 2px gray';
+                                    btn3.textContent = '取消';
+                                    btn3.style.textAlign = 'center';
+                                    btn3.style.fontSize = '100%';
+                                    btn3.style.background = 'green';
+                                    btn3.style.marginLeft = '2%';
+                                    td.appendChild(btn3);
+                                    btn3.onclick = function (){
+                                        btn2.style.display = 'none'
+                                        btn3.style.display = 'none';
+                                        btn.style.display = 'block';
+                                    }
+                                    btn2.onclick = function (){
+                                    var id = this.id;
+                                    var d = this.parentNode.parentNode.childNodes;
+                                    var deptId = d[0].textContent;
+                                    var f = 0;
+                                    var usr = localStorage.getItem('usr');
+                                    var pwd = localStorage.getItem('pwd');
+                                    $.ajax(
+                                        {
+                                            url: '/deletedept/',
+                                            dataType: 'json',
+                                            type: 'POST',
+                                            data: {'deptId': deptId, 'userCode': usr, 'pwd': pwd},
+                                            async: false,
+                                            success: function (data){
+                                                if(data.message==='success'){
+                                                    $(".message-pre").text('请求成功');
+                                                    $(".message-box").text('删除成功');
+                                                    $(".ok").show();
+                                                    $(".not-ok").css('display', 'none');
+                                                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                    f = 1;
+                                                }
+                                                else if(data.code === 404){
+                                                    $(".message-pre").text('请求失败');
+                                                    $(".message-box").text('删除部门失败');
+                                                    $(".not-ok").show();
+                                                    $(".ok").css('display', 'none');
+                                                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                }
+                                                else if(data.code === 10024){
+                                                    $(".message-pre").text('请求失败');
+                                                    $(".message-box").text('该部门存在员工无法删除');
+                                                    $(".not-ok").show();
+                                                    $(".ok").css('display', 'none');
+                                                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                }
+                                            }
+                                        }
+                                    )
+                                        var pp = this.parentNode.parentNode.parentNode;
+                                        if(f===1){
+                                            pp.removeChild(this.parentNode.parentNode);
+                                        }
+
+                                };
+                                };
+                                td.style.textAlign = 'center'
+                                td.appendChild(btn)
+                                tr.appendChild(td)
+                            $(".table1")[3].appendChild(tr);
+                    }
+
+                }
+            }
+        })
+    }
+    function changedept(obj, address){
+        var usr = localStorage.getItem('usr')
+        var pwd = localStorage.getItem('pwd')
+        var af_dept = obj.options[obj.selectedIndex].value
+        $.ajax({
+            url: '/changedept/',
+            type: 'POST',
+            dataType: 'json',
+            data: {'usr': usr, 'pwd': pwd, 'address': address, 'af_dept': af_dept},
+            success: function (data) {
+                if(data.code===200){
+                    $(".message-pre").text('请求成功');
+                    $(".message-box").text('成员部门修改成功');
+                    $(".ok").show();
+                    $(".not-ok").css('display', 'none');
+                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                }
+            }
+        })
+    }
+    function rolemanage(type){
+        $(".right4").css('display', 'none');
+        $(".right5").css('display', 'none');
+        $(".right6").css('display', 'none');
+        $(".right9").css('display', 'none');
+        $(".right8").css('display', 'none');
+        $(".right7").show()
+        var l = document.getElementsByClassName('left2')[0].childNodes[1];
+        for(i=1;i<l.childNodes.length/2;i++){
+            if(2*i-1==7){
+                l.childNodes[2*i-1].style.background = 'rgb(16,134,117)';
+            }
+            else{
+                l.childNodes[2*i-1].style.background = 'rgb(25,22,32)';
+            }
+        }
+        var usr = localStorage.getItem('usr')
+        var pwd = localStorage.getItem('pwd')
+        $.ajax(
+            {
+                url: '/getrole/',
+                type: 'POST',
+                dataType: 'json',
+                data: {'usr': usr, 'pwd': pwd},
+                success: function (data){
+                    var ta = document.getElementsByClassName('table1')[2].childNodes;
+                    var t = document.getElementsByClassName('table1')[2]
+                    for(i=ta.length-1;i>1;i--){
+                        t.removeChild(ta[i]);
+                    }
+
+                    var list = data.content;
+                        for(i=0;i<list.length;i++){
+                            let tr = document.createElement('tr')
+                            for(j=0;j<list[i].length;j++){
+                                let td = document.createElement('td')
+                                if(j == 0 || j == 3 || j == 4){td.textContent = list[i][j];}
+                                else {
+                                    let form = document.createElement('form')
+                                    form.method = 'post'
+                                    form.action = '/manage/'
+                                    let input = document.createElement('input')
+                                    input.value = list[i][j]
+                                    input.style.width = '80%'
+                                    input.style.height = '100%'
+                                    input.style.fontSize = '17px'
+                                    input.style.background = 'none'
+                                    input.style.border = 'none';
+                                    input.style.color = '#000000';
+                                    input.type = 'text'
+                                    input.name = 'data'
+                                    form.appendChild(input)
+                                    let usr = document.createElement('input')
+                                    usr.type = 'text'
+                                    usr.value = localStorage.getItem('usr')
+                                    usr.name = 'usr'
+                                    usr.style.display = 'none'
+                                    let pwd = document.createElement('input')
+                                    pwd.type = 'password'
+                                    pwd.value = localStorage.getItem('pwd')
+                                    pwd.name = 'pwd'
+                                    pwd.style.display = 'none'
+                                    form.appendChild(usr);
+                                    form.appendChild(pwd);
+
+                                    let type = document.createElement('input');
+                                    type.value = j;
+                                    type.style.display = 'none'
+                                    form.appendChild(type)
+                                    td.appendChild(form)
+                                    form.onsubmit = function () {
+                                        var id = this.parentNode.parentNode.childNodes[0].textContent
+                                        var type = this.childNodes[3].value
+                                        var data = input.value
+                                        $.ajax(
+                                            {
+                                                url: '/mdfrole/',
+                                                type: 'POST',
+                                                dataType: 'json',
+                                                async: true,
+                                                data: {'id': id, 'type': type, 'data': data},
+                                                success: function (data) {
+                                                    if (data.code === 200) {
+                                                        $(".message-pre").text('请求成功');
+                                                        $(".message-box").text('修改成功');
+                                                        $(".ok").show();
+                                                        $(".not-ok").css('display', 'none');
+                                                        $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                    }
+                                                    else{
+                                                        $(".message-pre").text('请求失败');
+                                                        $(".message-box").text('字符最大长度：15');
+                                                        $(".not-ok").show();
+                                                        $(".ok").css('display', 'none');
+                                                        $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                    }
+                                                }
+                                            }
+                                        )
+                                        return false
+                                    }
+
+
+                                    let button = document.createElement('input')
+                                    button.type = 'submit'
+                                    button.name = 'submit'
+                                    button.style.position = 'absolute'
+                                    button.style.left = '-9999px'
+                                    form.appendChild(button)
+                                }
+                                tr.appendChild(td)
+                            }
+                        let td = document.createElement(('td'))
+                        let btn = document.createElement('button')
+                                btn.className = 'deletes';
+                                btn.id = 'delete'+i;
+                                btn.style.width = '45%';
+                                btn.style.height = '40px';
+                                btn.style.float = 'left';
+                                btn.style.border = 'none';
+                                btn.style.borderRadius = '3px';
+                                btn.style.boxShadow = '2px 2px gray';
+                                btn.style.textAlign = 'center';
+                                btn.textContent = '删除';
+                                btn.style.fontSize = '100%';
+                                btn.style.background = 'goldenrod';
+                                btn.style.marginLeft = '2%';
+                                btn.onclick = function (){
+                                    this.style.display = 'none';
+                                    let btn2 = document.createElement('button')
+                                    btn2.className = 'deletes';
+                                    btn2.id = 'delete'+i;
+                                    btn2.style.width = '45%';
+                                    btn2.style.height = '40px';
+                                    btn2.style.float = 'left';
+                                    btn2.style.border = 'none';
+                                    btn2.style.borderRadius = '3px';
+                                    btn2.style.boxShadow = '2px 2px gray';
+                                    btn2.textContent = '确认';
+                                    btn2.style.textAlign = 'center';
+                                    btn2.style.fontSize = '100%';
+                                    btn2.style.background = 'red';
+                                    btn2.style.marginLeft = '2%';
+                                    td.appendChild(btn2);
+                                    let btn3 = document.createElement('button')
+                                    btn3.className = 'deletes';
+                                    btn3.id = 'delete'+i;
+                                    btn3.style.width = '45%';
+                                    btn3.style.height = '40px';
+                                    btn3.style.float = 'left';
+                                    btn3.style.border = 'none';
+                                    btn3.style.borderRadius = '3px';
+                                    btn3.style.boxShadow = '2px 2px gray';
+                                    btn3.textContent = '取消';
+                                    btn3.style.textAlign = 'center';
+                                    btn3.style.fontSize = '100%';
+                                    btn3.style.background = 'green';
+                                    btn3.style.marginLeft = '2%';
+                                    td.appendChild(btn3);
+                                    btn3.onclick = function (){
+                                        btn2.style.display = 'none'
+                                        btn3.style.display = 'none';
+                                        btn.style.display = 'block';
+                                    }
+                                    btn2.onclick = function (){
+                                    var id = this.id;
+                                    var d = this.parentNode.parentNode.childNodes;
+                                    var roleId = d[0].textContent;
+                                    var f = 0;
+                                    var usr = localStorage.getItem('usr');
+                                    var pwd = localStorage.getItem('pwd');
+                                    $.ajax(
+                                        {
+                                            url: '/deleterole/',
+                                            dataType: 'json',
+                                            type: 'POST',
+                                            data: {'roleId': roleId, 'userCode': usr, 'pwd': pwd},
+                                            async: false,
+                                            success: function (data){
+                                                if(data.message==='success'){
+                                                    $(".message-pre").text('请求成功');
+                                                    $(".message-box").text('删除成功');
+                                                    $(".ok").show();
+                                                    $(".not-ok").css('display', 'none');
+                                                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                    f = 1;
+                                                }
+                                                else if(data.code === 10024){
+                                                    $(".message-pre").text('请求失败');
+                                                    $(".message-box").text('删除角色失败');
+                                                    $(".not-ok").show();
+                                                    $(".ok").css('display', 'none');
+                                                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                }
+                                                else if(data.code === 10023){
+                                                    $(".message-pre").text('请求失败');
+                                                    $(".message-box").text('系统管理员无法删除');
+                                                    $(".not-ok").show();
+                                                    $(".ok").css('display', 'none');
+                                                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                }
+                                                else if(data.code === 10025){
+                                                    $(".message-pre").text('请求失败');
+                                                    $(".message-box").text('存在职称是该职称的员工');
+                                                    $(".not-ok").show();
+                                                    $(".ok").css('display', 'none');
+                                                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                }
+                                            }
+                                        }
+                                    )
+                                        var pp = this.parentNode.parentNode.parentNode;
+                                        if(f===1){
+                                            pp.removeChild(this.parentNode.parentNode);
+                                        }
+
+                                };
+                                };
+                                td.style.textAlign = 'center'
+                                td.appendChild(btn)
+                                tr.appendChild(td)
+                            $(".table1")[2].appendChild(tr);
+                        }
+                }
+            }
+        )
+    }
+    function changerole(obj, address){
+        var usr = localStorage.getItem('usr')
+        var pwd = localStorage.getItem('pwd')
+        var af_role = obj.options[obj.selectedIndex].value
+        $.ajax({
+            url: '/changepower/',
+            type: 'POST',
+            dataType: 'json',
+            data: {'usr': usr, 'pwd': pwd, 'address': address, 'af_role': af_role},
+            success: function (data) {
+                if(data.code===200){
+                    $(".message-pre").text('请求成功');
+                    $(".message-box").text('用户权限修改成功');
+                    $(".ok").show();
+                    $(".not-ok").css('display', 'none');
+                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                }
+                else if(data.code===10024){
+                    if(obj.options.length == 2){
+                        obj.options[1-obj.selectedIndex].selected = true;
+                    }
+                    else{
+                        obj.options[2].selected = true;
+                    }
+                    $(".message-pre").text('请求失败');
+                    $(".message-box").text('用户权限不足');
+                    $(".not-ok").show();
+                    $(".ok").css('display', 'none');
+                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                }
+                else if(data.code===10023){
+                    obj.options[2].selected = true;
+                    $(".message-pre").text('请求失败');
+                    $(".message-box").text('admin权限无法修改');
+                    $(".not-ok").show();
+                    $(".ok").css('display', 'none');
+                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                }
+            }
+        })
+    }
+    function getconsumerecord(type){
+        $(".right4").css('display', 'none');
+        $(".right5").css('display', 'none');
+        $(".right7").css('display', 'none');
+        $(".right8").css('display', 'none');
+        $(".right9").css('display', 'none');
+        $(".right6").show();
+        var l = document.getElementsByClassName('left2')[0].childNodes[1];
+            for(i=1;i<l.childNodes.length/2;i++){
+
+                if(2*i-1==7){
+                    l.childNodes[2*i-1].style.background = 'rgb(16,134,117)';
+                }
+                else{
+                    l.childNodes[2*i-1].style.background = 'rgb(25,22,32)';
+                }
+            }
+        $("#b5").show();
+        $("#b6").show();
+        $("#b7").show();
+        $("#b2").css('display', 'none')
+        $("#b3").css('display', 'none')
+        $("#b4").css('display', 'none')
+
+        {#$("#td3").text('消费金额');#}
+        {#$("#td4").text('消费时间');#}
+        var ta = document.getElementsByClassName('table1')[1].childNodes;
+        var t = document.getElementsByClassName('table1')[1]
+        for(i=ta.length-1;i>1;i--){
+            t.removeChild(ta[i]);
+        }
+        var usr = localStorage.getItem('usr')
+        var pwd = localStorage.getItem('pwd')
+        $.ajax({
+            url: '/consumerecord/',
+            type: 'POST',
+            dataType: 'json',
+            data: {'usr': usr, 'pwd': pwd, 'type': type},
+            success: function (data){
+                if(data.message === 'success'){
+                        var list = data.content;
+                        for(i=0;i<list.length;i++){
+                            let tr = document.createElement('tr')
+                            for(j=0;j<list[i].length;j++){
+                                let td = document.createElement('td')
+                                td.textContent = list[i][j];
+                                tr.appendChild(td)
+                            }
+                            $(".table1")[1].appendChild(tr);
+                        }
+                    }
+                    $(".showsum").text(data.sum);
+            }
+        })
+
+    }
+    $(".base2").click(function (){
+        var usr = document.getElementsByClassName('g1')[0].childNodes[1].textContent
+        var money = $(".howmoney").val()
+        var name = document.getElementsByClassName('g2')[0].childNodes[1].textContent
+        $.ajax({
+            url:'/inmoney/',
+            type: 'POST',
+            dataType: 'json',
+            data: {'usr': usr, 'money': money, 'name': name},
+            success: function (data){
+                if(data.message==='success') {
+                    tr = document.getElementsByClassName('table1')[0].childNodes
+                    for(i=2;i<tr.length;i++){
+                        if(tr[i].childNodes[0].textContent==usr){
+                            tr[i].childNodes[3].innerText = parseInt(money) + parseInt(document.getElementsByClassName('g3')[0].childNodes[1].textContent)
+                            break;
+                        }
+                    }
+                    document.getElementsByClassName('howmoney')[0].value = ''
+
+
+                    $(".message-pre").text('请求成功');
+                    $(".message-box").text('充值成功');
+                    $(".ok").show();
+                    $(".not-ok").css('display', 'none');
+                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                    document.getElementsByClassName('g1')[0].removeChild(document.getElementsByClassName('g1')[0].childNodes[1]);
+                    document.getElementsByClassName('g2')[0].removeChild(document.getElementsByClassName('g2')[0].childNodes[1]);
+                    document.getElementsByClassName('g3')[0].removeChild(document.getElementsByClassName('g3')[0].childNodes[1]);
+                    $(".givememoney").css('display', 'none');
+                }
+                else{
+                    $(".message-pre").text('请求失败');
+                    $(".message-box").text('金额输入错误');
+                    $(".not-ok").show();
+                    $(".ok").css('display', 'none');
+                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                }
+            }
+
+        })
+    })
+    var content;
+    $(".adduser").click(function (){
+        var usr = $(".in1").val();
+        var pwd = $(".in2").val();
+        var userName = $(".in3").val();
+        var phone = $(".in4").val();
+        var address = $(".in5").val()
+        var gender = $(".in6").val();
+        $.ajax({
+            url: '/addusr/',
+            type: 'POST',
+            dataType: 'json',
+            data: {'usr': usr, 'pwd': pwd, 'userName': userName, 'phone': phone, 'address': address, 'gender': gender},
+            success: function (data){
+                if(data.message==='succeed'){
+                $(".message-pre").text('请求成功');
+                $(".message-box").text('添加用户成功');
+                $(".ok").show();
+                $(".not-ok").css('display', 'none');
+                $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                for(i=1;i<=5;i++){
+                    tag = 'in'+i
+                    $("."+tag).val('')
+                }
+                }
+                else if(data.message === 'exists'){
+                    $(".message-pre").text('请求失败');
+                $(".message-box").text('账号已存在');
+                $(".not-ok").show();
+                $(".ok").css('display', 'none');
+                $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                }
+                else if(data.message === 'null value'){
+                    $(".message-pre").text('请求失败');
+                    $(".message-box").text('账号密码不能为空');
+                    $(".not-ok").show();
+                    $(".ok").css('display', 'none');
+                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                }
+            }
+        })
+    })
+    $("#b2").click(function (){getrechargerecord(1)})
+    $("#b3").click(function (){getrechargerecord(2)})
+    $("#b4").click(function (){getrechargerecord(3)})
+    function getrechargerecord(type){
+        $(".right6").show();
+        $(".right4").css('display', 'none');
+        $(".right9").css('display', 'none');
+        $(".right5").css('display', 'none');
+        $(".right7").css('display', 'none');
+        $(".right8").css('display', 'none');
+        var l = document.getElementsByClassName('left2')[0].childNodes[1];
+            for(i=1;i<l.childNodes.length/2;i++){
+                if(2*i-1==5){
+                l.childNodes[2*i-1].style.background = 'rgb(16,134,117)';
+                }
+                else{
+                    l.childNodes[2*i-1].style.background = 'rgb(25,22,32)';
+                }
+            }
+
+        $("#b2").show();
+        $("#b3").show();
+        $("#b4").show();
+        $("#b5").css('display', 'none');
+        $("#b6").css('display', 'none');
+        $("#b7").css('display', 'none');
+
+        var usr = localStorage.getItem('usr')
+        var pwd = localStorage.getItem('pwd')
+        $.ajax(
+            {
+                url: '/getrechargerecord/',
+                type: 'POST',
+                dataType: 'json',
+                data: {'usr':usr, 'pwd': pwd, 'type':type},
+                success: function (data){
+                    var ta = document.getElementsByClassName('table1')[1].childNodes;
+                    var t = document.getElementsByClassName('table1')[1]
+                    for(i=ta.length-1;i>1;i--){
+                        t.removeChild(ta[i]);
+                    }
+                    if(data.message === 'success'){
+                        var list = data.content;
+                        for(i=0;i<list.length;i++){
+                            let tr = document.createElement('tr')
+                            for(j=0;j<list[i].length;j++){
+                                let td = document.createElement('td')
+                                if(j == 0 || j == 1 || j == 7){td.textContent = list[i][j];}
+                                else {
+                                    let form = document.createElement('form')
+                                    form.method = 'post'
+                                    form.action = '/manage/'
+                                    let input = document.createElement('input')
+                                    input.value = list[i][j]
+                                    input.style.width = '80%'
+                                    input.style.height = '100%'
+                                    input.style.fontSize = '17px'
+                                    input.style.background = 'none'
+                                    input.style.border = 'none';
+                                    input.style.color = '#000000';
+                                    input.type = 'text'
+                                    input.name = 'data'
+                                    form.appendChild(input)
+                                    let usr = document.createElement('input')
+                                    usr.type = 'text'
+                                    usr.value = localStorage.getItem('usr')
+                                    usr.name = 'usr'
+                                    usr.style.display = 'none'
+                                    let pwd = document.createElement('input')
+                                    pwd.type = 'password'
+                                    pwd.value = localStorage.getItem('pwd')
+                                    pwd.name = 'pwd'
+                                    pwd.style.display = 'none'
+                                    form.appendChild(usr);
+                                    form.appendChild(pwd);
+
+                                    {#let  = document.createElement('input');#}
+                                    let type = document.createElement('input');
+                                    type.value = j;
+                                    type.style.display = 'none'
+                                    form.appendChild(type)
+                                    td.appendChild(form)
+                                    form.onsubmit = function () {
+                                        var id = this.parentNode.parentNode.childNodes[0].textContent
+                                        var type = this.childNodes[3].value
+                                        var data = input.value
+                                        $.ajax(
+                                            {
+                                                url: '/mdfbill/',
+                                                type: 'POST',
+                                                dataType: 'json',
+                                                async: true,
+                                                data: {'id': id, 'type': type, 'data': data},
+                                                success: function (data) {
+                                                    {#console.log('dfafsdfaa')#}
+                                                    if (data.code === 200) {
+                                                        $(".message-pre").text('请求成功');
+                                                        $(".message-box").text('修改成功');
+                                                        $(".ok").show();
+                                                        $(".not-ok").css('display', 'none');
+                                                        $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                    }
+                                                }
+                                            }
+                                        )
+                                        return false
+                                    }
+
+
+                                    let button = document.createElement('input')
+                                    button.type = 'submit'
+                                    {#button.style.display = 'none'#}
+                                    button.name = 'submit'
+                                    button.style.position = 'absolute'
+                                    button.style.left = '-9999px'
+                                    form.appendChild(button)
+                                }
+                                tr.appendChild(td)
+                            }
+                        let td = document.createElement(('td'))
+                        let btn = document.createElement('button')
+                                btn.className = 'deletes';
+                                btn.id = 'delete'+i;
+                                btn.style.width = '45%';
+                                btn.style.height = '40px';
+                                btn.style.float = 'left';
+                                btn.style.border = 'none';
+                                btn.style.borderRadius = '3px';
+                                btn.style.boxShadow = '2px 2px gray';
+                                btn.style.textAlign = 'center';
+                                btn.textContent = '删除';
+                                btn.style.fontSize = '100%';
+                                btn.style.background = 'goldenrod';
+                                btn.style.marginLeft = '2%';
+                                btn.onclick = function (){
+                                    this.style.display = 'none';
+                                    {#btn4.style.display = 'none';#}
+                                    let btn2 = document.createElement('button')
+                                    btn2.className = 'deletes';
+                                    btn2.id = 'delete'+i;
+                                    btn2.style.width = '45%';
+                                    btn2.style.height = '40px';
+                                    btn2.style.float = 'left';
+                                    btn2.style.border = 'none';
+                                    btn2.style.borderRadius = '3px';
+                                    btn2.style.boxShadow = '2px 2px gray';
+                                    btn2.textContent = '确认';
+                                    btn2.style.textAlign = 'center';
+                                    btn2.style.fontSize = '100%';
+                                    btn2.style.background = 'red';
+                                    btn2.style.marginLeft = '2%';
+                                    td.appendChild(btn2);
+                                    let btn3 = document.createElement('button')
+                                    btn3.className = 'deletes';
+                                    btn3.id = 'delete'+i;
+                                    btn3.style.width = '45%';
+                                    btn3.style.height = '40px';
+                                    btn3.style.float = 'left';
+                                    btn3.style.border = 'none';
+                                    btn3.style.borderRadius = '3px';
+                                    btn3.style.boxShadow = '2px 2px gray';
+                                    btn3.textContent = '取消';
+                                    btn3.style.textAlign = 'center';
+                                    btn3.style.fontSize = '100%';
+                                    btn3.style.background = 'green';
+                                    btn3.style.marginLeft = '2%';
+                                    td.appendChild(btn3);
+                                    btn3.onclick = function (){
+                                        btn2.style.display = 'none'
+                                        btn3.style.display = 'none';
+                                        btn.style.display = 'block';
+                                    }
+                                    btn2.onclick = function (){
+                                    var id = this.id;
+                                    var d = this.parentNode.parentNode.childNodes;
+                                    var billId = d[0].textContent;
+                                    var f = 0;
+                                    var usr = localStorage.getItem('usr');
+                                    var pwd = localStorage.getItem('pwd');
+                                    $.ajax(
+                                        {
+                                            url: '/deletebill/',
+                                            dataType: 'json',
+                                            type: 'POST',
+                                            data: {'billId': billId, 'userCode': usr, 'pwd': pwd},
+                                            async: false,
+                                            success: function (data){
+                                                if(data.message==='success'){
+                                                    $(".message-pre").text('请求成功');
+                                                    $(".message-box").text('删除成功');
+                                                    $(".ok").show();
+                                                    $(".not-ok").css('display', 'none');
+                                                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                    f = 1;
+                                                }
+                                                else{
+                                                    $(".message-pre").text('请求失败');
+                                                    $(".message-box").text('删除用户失败');
+                                                    $(".not-ok").show();
+                                                    $(".ok").css('display', 'none');
+                                                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                }
+                                            }
+                                        }
+                                    )
+                                        var pp = this.parentNode.parentNode.parentNode;
+                                        if(f===1){
+                                            pp.removeChild(this.parentNode.parentNode);
+                                        }
+
+                                };
+                                };
+                                td.style.textAlign = 'center'
+                                td.appendChild(btn)
+                                tr.appendChild(td)
+                            $(".table1")[1].appendChild(tr);
+                        }
+                    }
+                    $(".showsum").text(data.sum);
+                }
+            }
+        )
+    }
+    function adduser_view(){
+// <!--        $(".left22").css('color', 'bisque');-->
+// <!--        $(".left21").css('color', 'black');-->
+// <!--        $(".left23").css('color', 'black');-->
+// <!--        $(".left24").css('color', 'black');-->
+        var l = document.getElementsByClassName('left2')[0].childNodes[1];
+            for(i=1;i<l.childNodes.length/2;i++){
+
+                if(2*i-1==3){
+                     l.childNodes[2*i-1].style.background = 'rgb(16,134,117)';
+                }
+                else{
+                    l.childNodes[2*i-1].style.background = 'rgb(25,22,32)';
+                }
+            }
+        $(".right4").css('display', 'none');
+        $(".right5").show();
+        $(".right6").css('display', 'none');
+        $(".right9").css('display', 'none');
+        $(".right7").css('display', 'none');
+        $(".right8").css('display', 'none');
+    }
+    $(document).ready(
+        getusers(),
+        highlight_top(),
+    );
+
+    function highlight_top(){
+        a = document.getElementsByClassName('top-ul')[0].childNodes[5]
+        a.style.background = 'rgb(16,134,117)'
+    }
+
+    function getusers(){
+            var usr = localStorage.getItem('usr')
+            var pwd = localStorage.getItem('pwd')
+            var l = document.getElementsByClassName('left2')[0].childNodes[1];
+            for(i=1;i<l.childNodes.length/2;i++){
+                if(2*i-1==1){
+                  l.childNodes[2*i-1].style.background = 'rgb(16,134,117)';
+                }
+                else{
+                    l.childNodes[2*i-1].style.background = 'rgb(25,22,32)';
+                }
+            }
+            $.ajax(
+                {
+                    url: '/getusers/',
+                    async: false,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {'usr':usr, 'pwd':pwd},
+                    success: function (data){
+                        if(data.message==='notpass'){
+                            $(".message-pre").text('请求失败');
+                            $(".message-box").text('请刷新页面');
+                            $(".not-ok").show();
+                            $(".ok").css('display', 'none');
+                            $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                        }
+                        else{
+                            select = document.getElementById("dept")
+                            options = select.childNodes;
+                            for(i=options.length-1; i>=0; i--){
+                                select.removeChild(options[i]);
+                            }
+                            deptlists = data.deptlist
+                            let option = document.createElement("option")
+                            option.textContent = '选择部门'
+                            option.value = 0
+                            select.appendChild(option)
+                            for(i=0;i<deptlists.length;i++){
+                                let option = document.createElement("option")
+                                option.textContent = deptlists[i][0]
+                                option.value = deptlists[i][1]
+                                select.appendChild(option)
+                            }
+
+
+                            var ta = document.getElementsByClassName('table1')[0].childNodes;
+                            var t = document.getElementsByClassName('table1')[0]
+                            for(i=ta.length-1;i>1;i--){
+                                t.removeChild(ta[i]);
+                            }
+
+                            $(".right4").show();
+                            $(".right5").css('display', 'none');
+                            $(".right6").css('display', 'none');
+                            $(".right7").css('display', 'none');
+                            $(".right9").css('display', 'none');
+                            $(".right8").css('display', 'none');
+                            var list = data['content'];
+                            content = list;
+                            for(i=0;i<list.length;i++){
+                                let tr = document.createElement('tr');
+                                for(j=0;j<list[i].length;j++){
+                                    let td = document.createElement('td');
+                                    td.innerText = list[i][j];
+                                    if(j===list[i].length-3){
+                                        if(list[i][j]===2){
+                                            td.innerText = '男';
+                                        }
+                                        else{
+                                            td.innerText = '女';
+                                        }
+                                    }
+                                    if(j===list[i].length-2){
+                                        td.innerText = '';
+                                        let select = document.createElement('select')
+                                        select.id = 'select' + i;
+                                        select.style.width = '70%';
+                                        select.style.height = '80%';
+                                        if(i % 2 == 0){
+                                            select.style.background = "rgb(231,229,229)";
+                                        }
+                                        select.style.color = 'black';
+                                        select.style.border = 'none';
+                                        select.style.borderRadius = '3px';
+                                        rolelist = data.rolelist
+                                        for(k=0;k<rolelist.length;k++){
+                                            let option = document.createElement('option')
+                                            option.textContent = rolelist[k][0]
+                                            option.value = rolelist[k][1]
+                                            select.appendChild(option)
+                                            if(list[i][j] === parseInt(option.value)){
+                                                option.selected = 'selected'
+                                            }
+                                        }
+                                        td.appendChild(select);
+                                    }
+                                    if(j===list[i].length-1){
+                                        td.innerText = '';
+                                        let select = document.createElement('select')
+                                        select.id = 'select' + i;
+                                        select.style.width = '70%';
+                                        select.style.height = '80%';
+                                        if(i % 2 == 0){
+                                            select.style.background = "rgb(231,229,229)";
+                                        }
+                                        select.style.color = 'black';
+                                        select.style.border = 'none';
+                                        select.style.borderRadius = '3px';
+                                        deptlist = data.deptlist
+                                        let option = document.createElement('option')
+                                        option.textContent = '选择部门'
+                                        option.value = 0
+                                        select.appendChild(option)
+                                        for(l=0;l<deptlist.length;l++){
+                                            let option = document.createElement('option')
+                                            option.textContent = deptlist[l][0]
+                                            option.value = deptlist[l][1]
+                                            select.appendChild(option)
+                                            if(list[i][j] === parseInt(option.value)){
+                                                option.selected = 'selected'
+                                            }
+                                        }
+                                        td.appendChild(select)
+                                    }
+                                    tr.appendChild(td)
+                                }
+                                let td = document.createElement('td')
+
+                                let btn = document.createElement('button')
+                                btn.className = 'deletes';
+                                btn.id = 'delete'+i;
+                                btn.style.width = '45%';
+                                btn.style.height = '40px';
+                                btn.style.float = 'left';
+                                btn.style.border = 'none';
+                                btn.style.borderRadius = '3px';
+                                btn.style.boxShadow = '2px 2px gray';
+                                btn.style.textAlign = 'center';
+                                btn.textContent = '删除';
+                                btn.style.fontSize = '100%';
+                                btn.style.background = 'goldenrod';
+                                btn.style.marginLeft = '2%';
+                                btn.onclick = function (){
+                                    this.style.display = 'none';
+                                    {#btn4.style.display = 'none';#}
+                                    let btn2 = document.createElement('button')
+                                    btn2.className = 'deletes';
+                                    btn2.id = 'delete'+i;
+                                    btn2.style.width = '45%';
+                                    btn2.style.height = '40px';
+                                    btn2.style.float = 'left';
+                                    btn2.style.border = 'none';
+                                    btn2.style.borderRadius = '3px';
+                                    btn2.style.boxShadow = '2px 2px gray';
+                                    btn2.textContent = '确认';
+                                    btn2.style.textAlign = 'center';
+                                    btn2.style.fontSize = '100%';
+                                    btn2.style.background = 'red';
+                                    btn2.style.marginLeft = '2%';
+                                    td.appendChild(btn2);
+                                    let btn3 = document.createElement('button')
+                                    btn3.className = 'deletes';
+                                    btn3.id = 'delete'+i;
+                                    btn3.style.width = '45%';
+                                    btn3.style.height = '40px';
+                                    btn3.style.float = 'left';
+                                    btn3.style.border = 'none';
+                                    btn3.style.borderRadius = '3px';
+                                    btn3.style.boxShadow = '2px 2px gray';
+                                    btn3.textContent = '取消';
+                                    btn3.style.textAlign = 'center';
+                                    btn3.style.fontSize = '100%';
+                                    btn3.style.background = 'green';
+                                    btn3.style.marginLeft = '2%';
+                                    td.appendChild(btn3);
+                                    btn3.onclick = function (){
+                                        btn2.style.display = 'none'
+                                        btn3.style.display = 'none';
+                                        {#btn4.style.display = 'block';#}
+                                        btn.style.display = 'block';
+                                    }
+                                    btn2.onclick = function (){
+                                    var id = this.id;
+                                    var d = this.parentNode.parentNode.childNodes;
+                                    var address = d[0].textContent;
+                                    var f = 0;
+                                    var usr = localStorage.getItem('usr');
+                                    var pwd = localStorage.getItem('pwd');
+                                    $.ajax(
+                                        {
+                                            url: '/deleteusr/',
+                                            dataType: 'json',
+                                            type: 'POST',
+                                            data: {'usr': address, 'address': usr, 'pwd': pwd},
+                                            async: false,
+                                            success: function (data){
+                                                if(data.message==='success'){
+                                                    $(".message-pre").text('请求成功');
+                                                    $(".message-box").text('删除用户成功');
+                                                    $(".ok").show();
+                                                    $(".not-ok").css('display', 'none');
+                                                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                    f = 1;
+                                                }
+                                                else if(data.code === 10022){
+                                                    $(".message-pre").text('请求失败');
+                                                    $(".message-box").text('不能删除自己');
+                                                    $(".not-ok").show();
+                                                    $(".ok").css('display', 'none');
+                                                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                }
+                                                else if(data.code === 10023){
+                                                    $(".message-pre").text('请求失败');
+                                                    $(".message-box").text('用户权限不足');
+                                                    $(".not-ok").show();
+                                                    $(".ok").css('display', 'none');
+                                                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                }
+                                                else{
+                                                    $(".message-pre").text('请求失败');
+                                                    $(".message-box").text('删除用户失败');
+                                                    $(".not-ok").show();
+                                                    $(".ok").css('display', 'none');
+                                                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                }
+                                            }
+                                        }
+                                    )
+                                        var pp = this.parentNode.parentNode.parentNode;
+                                        if(f===1){
+                                            pp.removeChild(this.parentNode.parentNode);
+                                        }
+
+                                };
+                                };
+                                td.style.textAlign = 'center'
+                                td.appendChild(btn)
+                                tr.appendChild(td)
+                                $(".table1")[0].appendChild(tr);
+                                var select = tr.childNodes[tr.childNodes.length-3].childNodes[0]
+                                select.addEventListener('change', changerole.bind(this, select, select.parentNode.parentNode.childNodes[0].textContent), false);
+                                var select2 = tr.childNodes[tr.childNodes.length-2].childNodes[0]
+                                select2.addEventListener('change', changedept.bind(this, select2, select.parentNode.parentNode.childNodes[0].textContent), false);
+
+                            }
+
+                        }
+                    }
+                }
+            )
+        $(".table").show();
+        }
+        $("#b1").click(function (){
+        var address = $(".search").val();
+        var dept = $("#dept").val();
+        var usr = localStorage.getItem('usr')
+        var password = localStorage.getItem('pwd')
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '/search_usr/',
+                    dataType: 'json',
+                    data:{'usr': address, 'address': usr, 'password': password, 'dept': dept},
+                    success(data){
+                        var ta = document.getElementsByClassName('table1')[0].childNodes;
+                            var t = document.getElementsByClassName('table1')[0]
+                            for(i=ta.length-1;i>1;i--){
+                                t.removeChild(ta[i]);
+                            }
+                            var list = data['content'];
+                            content = list;
+                            for(i=0;i<list.length;i++){
+                                let tr = document.createElement('tr');
+                                for(j=0;j<list[i].length;j++){
+                                    let td = document.createElement('td');
+                                    td.innerText = list[i][j];
+                                    if(j===list[i].length-3){
+                                        if(list[i][j]===2){
+                                            td.innerText = '男';
+                                        }
+                                        else{
+                                            td.innerText = '女';
+                                        }
+                                    }
+                                    if(j===list[i].length-2){
+                                        td.innerText = '';
+                                        let select = document.createElement('select')
+                                        select.id = 'select' + i;
+                                        select.style.width = '70%';
+                                        select.style.height = '80%';
+                                        if(i % 2 == 0){
+                                            select.style.background = 'rgb(231,229,229)';
+                                        }
+                                        select.style.color = 'black';
+                                        select.style.border = 'none';
+                                        select.style.borderRadius = '3px';
+                                        select.style.textAlign = 'center'
+                                        select.options.add(new Option('系统管理员', 1));
+                                        select.options.add(new Option('经理', 2));
+                                        select.options.add(new Option('普通员工', 3));
+                                        select.options[list[i][j]-1].selected = true;
+                                        td.appendChild(select);
+                                        
+                                    }
+                                    if(j===list[i].length-1){
+                                        td.innerText = '';
+                                        let select = document.createElement('select')
+                                        select.id = 'select' + i;
+                                        select.style.width = '70%';
+                                        select.style.height = '80%';
+                                        if(i % 2 == 0){
+                                            select.style.background = "rgb(231,229,229)";
+                                        }
+                                        select.style.color = 'black';
+                                        select.style.border = 'none';
+                                        select.style.borderRadius = '3px';
+                                        deptlist = data.deptlist
+                                        let option = document.createElement('option')
+                                        option.textContent = '选择部门'
+                                        option.value = 0
+                                        select.appendChild(option)
+                                        for(l=0;l<deptlist.length;l++){
+                                            let option = document.createElement('option')
+                                            option.textContent = deptlist[l][0]
+                                            option.value = deptlist[l][1]
+                                            select.appendChild(option)
+                                            if(list[i][j] === parseInt(option.value)){
+                                                option.selected = 'selected'
+                                            }
+                                        }
+                                        td.appendChild(select)
+                                    }
+                                    tr.appendChild(td);
+                                }
+                                let td = document.createElement('td')
+                                {#let btn4 = document.createElement('button')#}
+                                {#btn4.className = 'deletes';#}
+                                {#btn4.id = 'delete'+i;#}
+                                {#btn4.style.width = '45%';#}
+                                {#btn4.style.height = '80%';#}
+                                {#btn4.style.float = 'left';#}
+                                {#btn4.style.border = 'none';#}
+                                {#btn4.style.borderRadius = '3px';#}
+                                {#btn4.style.boxShadow = '2px 2px gray';#}
+                                {#btn4.textContent = '充值';#}
+                                {#btn4.style.textAlign = 'center';#}
+                                {#btn4.style.fontSize = '100%';#}
+                                {#btn4.style.background = 'orange';#}
+                                {#btn4.style.marginLeft = '2%';#}
+                                {#td.appendChild(btn4);#}
+                                {#btn4.onclick = function (){#}
+                                {#    $(".givememoney").show()#}
+                                {#    var me = this.parentNode.parentNode.childNodes;#}
+                                {#    // for(i=0;i<me.length;i++){#}
+                                {#    //     console.log(me[i].textContent)#}
+                                {#    // }#}
+                                {#    var div = document.getElementsByClassName('g1')[0];#}
+                                {#        let d = document.createElement('div')#}
+                                {#        d.textContent = me[0].textContent;#}
+                                {#        div.appendChild(d);#}
+                                {#    var div2 = document.getElementsByClassName('g2')[0];#}
+                                {#        let d2 = document.createElement('div')#}
+                                {#        d2.textContent = me[1].textContent;#}
+                                {#        div2.appendChild(d2);#}
+                                {#    var div3 = document.getElementsByClassName('g3')[0];#}
+                                {#        let d3 = document.createElement('div')#}
+                                {#        d3.textContent = me[3].textContent;#}
+                                {#        div3.appendChild(d3);#}
+                                {# #}
+                                let btn = document.createElement('button')
+                                btn.className = 'deletes';
+                                btn.id = 'delete'+i;
+                                btn.style.width = '45%';
+                                btn.style.height = '40px';
+                                btn.style.float = 'left';
+                                btn.style.border = 'none';
+                                btn.style.borderRadius = '3px';
+                                btn.style.boxShadow = '2px 2px gray';
+                                btn.textContent = '删除';
+                                btn.style.textAlign = 'center';
+                                btn.style.fontSize = '100%';
+                                btn.style.background = 'goldenrod';
+                                btn.onclick = function (){
+                                    btn.style.display = 'none';
+                                    {#btn4.style.display = 'none';#}
+                                    let btn2 = document.createElement('button')
+                                    btn2.className = 'deletes';
+                                    btn2.id = 'delete'+i;
+                                    btn2.style.width = '45%';
+                                    btn2.style.height = '40px';
+                                    btn2.style.float = 'left';
+                                    btn2.style.border = 'none';
+                                    btn2.style.borderRadius = '3px';
+                                    btn2.style.boxShadow = '2px 2px gray';
+                                    btn2.textContent = '确认';
+                                    btn2.style.textAlign = 'center';
+                                    btn2.style.fontSize = '100%';
+                                    btn2.style.background = 'red';
+                                    btn2.style.marginLeft = '2%';
+                                    td.appendChild(btn2);
+                                    let btn3 = document.createElement('button')
+                                    btn3.className = 'deletes';
+                                    btn3.id = 'delete'+i;
+                                    btn3.style.width = '45%';
+                                    btn3.style.height = '40px';
+                                    btn3.style.float = 'left';
+                                    btn3.style.border = 'none';
+                                    btn3.style.borderRadius = '3px';
+                                    btn3.style.boxShadow = '2px 2px gray';
+                                    btn3.textContent = '取消';
+                                    btn3.style.textAlign = 'center';
+                                    btn3.style.fontSize = '100%';
+                                    btn3.style.background = 'green';
+                                    btn3.style.marginLeft = '2%';
+                                    td.appendChild(btn3);
+                                    btn3.onclick = function (){
+                                        btn2.style.display = 'none'
+                                        btn3.style.display = 'none'
+                                        btn.style.display = 'block'
+                                        td.style.textAlign = 'center'
+                                    }
+                                    btn2.onclick = function (){
+                                    var id = this.id;
+                                    var d = this.parentNode.parentNode.childNodes;
+                                    var address = d[0].textContent;
+                                    var f = 0;
+                                    var usr = localStorage.getItem('usr');
+                                    var pwd = localStorage.getItem('pwd');
+                                    $.ajax(
+                                        {
+                                            url: '/deleteusr/',
+                                            dataType: 'json',
+                                            type: 'POST',
+                                            data: {'usr': address, 'address': usr, 'pwd': pwd},
+                                            async: false,
+                                            success: function (data){
+                                                if(data.message==='success'){
+                                                    $(".message-pre").text('请求成功');
+                                                    $(".message-box").text('删除用户成功');
+                                                    $(".ok").show();
+                                                    $(".not-ok").css('display', 'none');
+                                                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                    f = 1;
+                                                }
+                                                else if(data.code === 10022){
+                                                    $(".message-pre").text('请求失败');
+                                                    $(".message-box").text('不能删除自己');
+                                                    $(".not-ok").show();
+                                                    $(".ok").css('display', 'none');
+                                                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                }
+                                                else if(data.code === 10023){
+                                                    $(".message-pre").text('请求失败');
+                                                    $(".message-box").text('用户权限不足');
+                                                    $(".not-ok").show();
+                                                    $(".ok").css('display', 'none');
+                                                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                }
+                                                else{
+                                                    $(".message-pre").text('请求失败');
+                                                    $(".message-box").text('删除用户失败');
+                                                    $(".not-ok").show();
+                                                    $(".ok").css('display', 'none');
+                                                    $(".message").stop().fadeIn(1).delay(2000).fadeOut(1);
+                                                }
+                                            }
+                                        }
+                                    )
+                                        var pp = this.parentNode.parentNode.parentNode;
+                                        if(f===1){
+                                            pp.removeChild(this.parentNode.parentNode);
+                                        }
+
+                                };
+                                };
+                                td.appendChild(btn)
+                                tr.appendChild(td)
+                                $(".table1")[0].appendChild(tr);
+                                var select = tr.childNodes[tr.childNodes.length-3].childNodes[0]
+                                select.addEventListener('change', changerole.bind(this,select, select.parentNode.parentNode.childNodes[0].textContent), false);
+                                var select2 = tr.childNodes[tr.childNodes.length-2].childNodes[0]
+                                select2.addEventListener('change', changedept.bind(this, select2, select.parentNode.parentNode.childNodes[0].textContent), false);
+                            }
+                    }
+                }
+            )
+        }
+        )
+
+</script>
+</body>
+</html>

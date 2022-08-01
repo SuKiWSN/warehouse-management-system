@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .error {
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    position: relative;
+    {#margin-left: 32px;#}
+}
+.error::before,
+.error::after {
+    content: "";
+    position: absolute;
+    height: 90px;
+    width: 10px;
+    top: 0;
+    right: 0;
+    background: white;
+}
+.error::before {
+    transform: rotate(45deg);
+}
+.error::after {
+    transform: rotate(-45deg);
+}
+
+    </style>
+</head>
+<body>
+    <div class="error"></div>
+
+</body>
+</html>
