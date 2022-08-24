@@ -3,10 +3,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>登陆</title>
+    <title>登录</title>
     <style>
         body{
             font-family: Arial;
+            font-weight:bold;
         }
         h3{
             color: #eed182;
@@ -31,16 +32,14 @@
             left: 0;
             margin: auto;
             text-align: center;
-            box-shadow: 0 0 5px 1px  rgb(209, 215, 226);
+
             border-radius: 10px;
             transition: 0.3s;
             padding: 10px;
             width: 40%;
             height: 450px;
         }
-        .font-size-h1:hover{
-            box-shadow: 0 1px 1px rgb(209, 215, 226);
-        }
+
         .input-group{
             width: 100%;
             height: 30px;
@@ -59,7 +58,8 @@
         .item_buttons{
             width: 100%;
             height: 35px;
-            background-color: rgb(166, 149, 81);
+           {## background-color: rgb(166, 149, 81);#}
+            background-color: rgb(34, 98, 143);
             transition: 0.3s;
             border-radius: 3px;
             border: none;
@@ -70,7 +70,7 @@
             width: 100%;
             height: 35px;
             /* {#1178660#} */
-            background-color: rgb(166 122 81);
+            background-color: rgb(32, 98, 143);
             transition: 0.3s;
             border-radius: 3px;
             border: none;
@@ -78,13 +78,14 @@
             color: white;
         }
         .regis:hover{
-            background: rgb(139 105 74);
+            background-color: rgb(32, 73, 102);
         }
         .item_buttons:hover{
-            background-color: rgb(139 105 74);
+
+            background: rgb(32, 73, 102);
         }
         a{
-            color: black;
+            color: white;
             text-decoration:none;
             transition: 0.2s;
         }
@@ -94,18 +95,18 @@
         .vertify{
             width: 100%;
             height: 35px;
-            background-color: rgb(166 122 81);
+            background-color: rgb(34, 98, 143);
             transition: 0.3s;
             border-radius: 5px;
             border: none;
             font-size: 100%;
-            color: white;
+            color: black;
         }
         .vertify:hover{
-            background-color: rgb(139 105 74);
+            background-color: rgb(32, 73, 102);
         }
         .message{
-            box-shadow: 0 0 5px 2px  gray;
+
             border-radius: 5px;
             height: 100px;
             width: 300px;
@@ -116,9 +117,6 @@
             background: white;
             display: none;
             transition: 0.3s;
-        }
-        .message:hover{
-            box-shadow: 0 0 2px 1px  gray;
         }
         .message-box{
             width: 100%;
@@ -147,7 +145,7 @@
             border-width: 0 5px 5px 0;
             transform: rotate(45deg);
             float: left;
-            box-shadow: 2px 0 0 0 gray;
+
         }
         .not-ok {
             display: none;
@@ -168,16 +166,17 @@
         }
         .not-ok:before {
             transform: rotate(45deg);
-            box-shadow: 1px 0 0 0 gray;
+
         }
         .not-ok:after {
             transform: rotate(-45deg);
-            box-shadow: 0 1px 0 0 gray;
+
 }
 
     </style>
 </head>
-<body>
+<body style="width: 100%, height: 100%;">
+    <div style="width: 100%; height: 100%; position: fixed; background: black; margin: auto; top: 0; right: 0; bottom: 0; left: 0; opacity: 0.7"> </div>
     <div class="message">
         <div class="ok"></div>
         <div class="not-ok"></div>
@@ -186,16 +185,16 @@
     </div>
         <style type="text/css">
          #colorchange{
-            background-color: red;
-            background-image: linear-gradient(to right, rgb(51,112,237) ,rgb(211,130,207));
-            opacity: 0.85
+            background-color: rgb(22, 22, 22);
+          {#  # background-image: linear-gradient(to right, rgb(255,255,0) ,rgb(51,0,255));#}
+          {## opacity: 0.85#}
          }
     </style>
     <div style="width: 100%; height: 100%;">
         <div class="font-size-h1 slog" id="colorchange">
             <div>
                 <h1>
-                    仓库管理系统
+                    <font color="white">仓库管理系统</font>
                 </h1>
                 <h3>
                     Warehouse Management System
@@ -211,14 +210,14 @@
             </div>
             </form>
             <div class="bts" style="margin-top: 135px;margin-left: 0; width: 20%; height: 10px;">
-                <a href="javascript:void(0)" onclick="gotoreg()">注册</a>
+                <a href="javascript:void(0)" onclick="gotoreg()" color="white">注册</a>
             </div>
         </div>
     </div>
     <div class="font-size-h1 sreg" style="display: none" id="colorchange">
         <div>
             <h1>
-                仓库管理系统
+                <font color="white">仓库管理系统</font>
             </h1>
             <h3>
                 Warehouse Management System
@@ -230,14 +229,14 @@
                 <input id="regcode" name="pwd" class="input-group" placeholder="邮箱验证码" type="text">
             </div>
             <div style="width: 20%;float: right">
-                <button class="vertify">发送</button>
+                <button class="vertify"><font color="white">发送</font></button>
             </div>
             <span><input name="pwd" id="regpwd" class="input-group" placeholder="密码(8-15位)" type="password"></span><br>
             <span><input name="pwd" id="regvtfpwd" class="input-group" placeholder="再次输入密码" type="password"></span><br>
             <div><button class="regis" color="white">注册</button></div>
         </div>
         <div class="bts" style="margin-top: 37px;margin-left: 0; width: 20%; height: 10px;float: left">
-                <a href="javascript:void(0)" onclick="gotolog()" color="white">返回登陆</a>
+                <a href="javascript:void(0)" onclick="gotolog()" color="white">返回登录</a>
             </div>
     </div>
 
@@ -251,7 +250,7 @@
             $(this).stop().fadeOut(1000);
         });
         $(".item_buttons").click(function (){
-            $(this).text("正在登陆...");
+            $(this).text("正在登录...");
         });
         $(".vertify").click(function (){
             clicked = true;

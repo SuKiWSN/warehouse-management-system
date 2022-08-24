@@ -40,3 +40,8 @@ def mail_code(request):
         return JsonResponse({'status': 200, 'message': '发送成功'})
     except smtplib.SMTPException:
         return JsonResponse({'status': 10024, 'message': '发送失败'})
+
+
+# bs cs
+# 什么语言
+# 

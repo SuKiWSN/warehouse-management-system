@@ -22,7 +22,10 @@ def manage(request):
         content['address'] = a.address
         d = datetime.date.today()
         b = a.birthday
-        age = d.year - b.year - int((d.month, d.day) < (b.month, b.day))
+        if b != None:
+            age = d.year - b.year - int((d.month, d.day) < (b.month, b.day))
+        else:
+            age = ''
         content['userAge'] = age
         content['creationDate'] = a.creationDate
         content['userRole'] = a.userRole
@@ -136,9 +139,12 @@ def getdetail(request):
     processResult = img.processResult
     processor = img.processor
     processor = user.objects.filter(userCode=processor)[0].userName
+    remarks = img.remarks
+    if remarks == None:
+        remarks = ''
     f = open(imgPath, 'rb')
     data = f.read()
-    return JsonResponse({'code': 200, 'content': [alarmCode, deviceCode, deviceName, alarmDate, alarmType, processDate, processState, processResult, processor], 'data': base64.b64encode(data).decode('ascii')})
+    return JsonResponse({'code': 200, 'content': [alarmCode, deviceCode, deviceName, alarmDate, alarmType, processDate, processState, processResult, processor, remarks], 'data': base64.b64encode(data).decode('ascii')})
 
 def getrole(request):
     usr = request.POST.get('usr')
@@ -310,7 +316,12 @@ def search_usr(request):
     deptlist = []
     for depts in deptlists:
         deptlist.append([depts.departName, depts.id])
-    return JsonResponse({'content': content, 'deptlist': deptlist})
+
+    rolelists = role.objects.filter()
+    rolelist = []
+    for roles in rolelists:
+        rolelist.append([roles.roleName, roles.id])
+    return JsonResponse({'content': content, 'deptlist': deptlist, 'rolelist': rolelist})
 
 def add_user(request):
     usr = request.POST.get('usr')
@@ -560,10 +571,13 @@ def processalarm(request):
     id = request.POST.get('id')
     ty = int(request.POST.get('type'))
     userCode = request.POST.get('usr')
+    remarks = request.POST.get('remarks')
+    print(remarks, id)
     a = alarm.objects.filter(id=id)[0]
     a.processState = 1
     a.processDate = datetime.datetime.now()
     a.processor = userCode
+    a.remarks = remarks
     if ty == 0:
         a.processResult = 0
     elif ty == 1:
@@ -597,11 +611,13 @@ def multiop(request):
             a.processDate = datetime.datetime.now()
             a.processResult = 0
             a.processor = usr
+            a.remarks = "批量处理"
             a.save()
         elif type == 3:
             a.processState = 1
             a.processDate = datetime.datetime.now()
             a.processResult = 1
             a.processor = usr
+            a.remarks = "批量处理"
             a.save()
     return JsonResponse({'code': 200, 'message': 'success'})

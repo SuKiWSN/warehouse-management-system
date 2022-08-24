@@ -16,13 +16,14 @@ button{
     border:1px solid #aaa;
 }
 .input-group{
-    width: 100%;
-    height: 100%;
-    margin: auto;
-    margin-bottom: 20px;
+    width: 250px;
+    height: 30px;
+    margin-left: 125px;
+    margin-top: 40px;
     border-radius: 4px;
+    color: #aaaaaa;
     font-size: 16px;
-    background-color: #ffffff;
+    background-color: rgb(33, 33, 33);
     outline: none;
     border:1px solid #aaa;
 
@@ -35,7 +36,7 @@ button{
 
 
 .input-group:focus{
-    background: #f8f8ff;
+    background: rgb(22, 22, 22);
 }
 #top{
     width: 100%;
@@ -84,13 +85,14 @@ a{
     width: 15%;
     height: 100%;
     background: rgb(32,30,43);
-    box-shadow: 5px 5px 5px beige;
+    /*box-shadow: 5px 5px 5px beige;*/
     float: left;
 }
 
 html, body{
     height: 99%;
     width: 100%;
+    background: #111111;
 }
 .left div, .left2 div {
     margin-top: 70px;
@@ -113,7 +115,7 @@ html, body{
     height: 100%;
     margin-top: 10px;
     margin-right: 10px;
-    background: white;
+    background: #333333;
     float: left;
 
 }
@@ -123,7 +125,7 @@ html, body{
     margin-top: 0;
     margin-left: 10px;
     margin-right: 10px;
-    background: white;
+    background: #333333;
     float: left;
 }
 .right div{
@@ -137,6 +139,7 @@ select{
     font-size:14px;
     margin-right: 0;
     -webkit-appearance:none;
+    background: rbg(33, 33, 33);
     color: gray;
     font-size: 100%;
     -moz-appearance:none;
@@ -145,23 +148,25 @@ select{
     -khtml-appearance:none;
 }
 .base1{
-    width: 500px;
+    width: 40%;
     height: 70px;
-    background: white;
+    background: rgb(22, 22, 22);
     text-align: center;
     line-height: 70px;
-    border: 1px gray solid;
+    border: 1px solid;
+    color: #cccccc;
     border-radius: 5px;
     float: left;
 }
 .base2,.base3,.add_usr, .base4, .base5, .base6{
     width: 100px;
     margin: auto;
+    border: none;
     top: 50px;
     height: 30px;
-    background: goldenrod;
+    background: rgb(32, 73, 102);
+    color: #aaaaaa;
     text-align: center;
-    box-shadow: 5px 5px rgb(166 122 81);
     transition: 0.5s;
     border-radius: 5px;
 
@@ -169,15 +174,15 @@ select{
 .bas button, .add_usr button{
     border:none;
     background: none;
+    color: #aaaaaa
 }
-.base2:hover,.base3:hover, .base4:hover, .base5:hover, .base6:hover{
-    box-shadow: 10px 10px goldenrod;
-    background: rgb(166 122 81);
-}
-.bas:hover{
-    box-shadow: 10px 10px goldenrod;
-    background: rgb(166 122 81);
-}
+/*.base2:hover,.base3:hover, .base4:hover, .base5:hover, .base6:hover{*/
+/*    background: rgb(166 122 81);*/
+/*}*/
+/*.bas:hover{*/
+/*    box-shadow: 10px 10px goldenrod;*/
+/*    background: rgb(166 122 81);*/
+/*}*/
 .base2 button, .base3 button,.bas button, .base4 button, .base5 button, .base6 button{
     border: none;
     background: none;
@@ -189,7 +194,7 @@ select{
 .right2{
     width: 32%;
     height: 100%;
-    background: white;
+    background: #333333;
     float: left;
 }
 .message{
@@ -289,9 +294,10 @@ select{
 .bas{
     width: 100px;
     height: 30px;
-    background: goldenrod;
+    background: rgb(32, 73, 102);
     text-align: center;
-    box-shadow: 5px 5px rgb(166 122 81);
+    color: #aaaaaa;
+    /*box-shadow: 5px 5px rgb(166 122 81);*/
     margin-left: 200px;
     margin-top: 20px;
     transition: 0.5s;
@@ -301,7 +307,9 @@ select{
     width: 85%;
     height: 100%;
     margin-left: 10px;
-    background: white;
+    border-radius: 5px;
+    border: 1px solid black;
+    background: #444444;
     float: left;
 }
 
@@ -314,22 +322,26 @@ select{
     text-align: center;
 }
 table tr td, table, table tr{
-    border: 1px solid rgb(197,197,197);
+    /*border: 1px solid rgb(197,197,197);*/
     text-align: center;
 }
 table{
+    border-radius: 10px;
     margin: auto;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
+    box-shadow: 7px 7px 5px rgb(22, 22, 22);
 }
 table tr td{
     width: 10%;
     height: 50px;
+    background: rgb(33, 33, 33);
+    color: #aaaaaa;
 }
 table tr:nth-child(2n){
-    background: rgb(231,229,229);
+    background: rgb(22, 22, 22);
 }
 .right42{
     width: 100px;
@@ -337,19 +349,21 @@ table tr:nth-child(2n){
     margin-left: 60px;
     margin-top: 20px;
 }
+.b1{
+    border-radius: 2px;
+}
+.b1 button{
+    background: rgb(22, 22, 22);
+    color: #aaaaaa
+}
 .b1:hover{
-    background: rgb(166 122 81);
-    box-shadow: goldenrod;
+    background: rgb(22, 22, 22)
 }
 .right5{
     display: none;
 }
 .add_usr{
-    width: 100px; height: 30px; background: goldenrod; text-align: center;box-shadow: 5px 5px rgb(166 122 81)
-}
-.add_usr:hover{
-    background: rgb(166 122 81);
-    box-shadow: 10px 10px goldenrod;
+    width: 250px; height: 30px; background: rgb(32, 73, 102); text-align: center;
 }
 .givememoney{
     position: fixed;
@@ -372,7 +386,8 @@ table tr:nth-child(2n){
 }
 .fsdffs2 tr td{
     background: rgb(33, 33, 33);
-    width: 25%; border: 1px;
+    width: 25%;
+    border: 1px;
 }
 .fsdffs tr td div, .fsdffs2 tr td div{
     width: 100%;

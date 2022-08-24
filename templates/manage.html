@@ -12,7 +12,7 @@
         .b1{transition:0.3s;background: goldenrod; float:left; width: 50px; height: 30px}
     </style>
 </head>
-<body>
+<body bgcolor="#111111">
     <div id="top">
         <ul class="top-ul">
             <li id="welcome">
@@ -63,10 +63,10 @@
 
     <div class="managediv">
         <div class="right4">
-            <div>
-                <div class="table" style="margin-top: 100px; height: 500px; overflow-y: scroll; display: none">
-                    <table class="table1" style="width: 95%; border: 10px;" cellspacing="0" cellpadding="0">
-                        <tr style="width: 100%; height: 30px; border: 1px solid red; background-color:#F2F2F2;">
+            <div style="height: 70%">
+                <div class="table" style="margin-top: 100px; margin-left: 50px; height: 100%; width: 95%; overflow-y: scroll; display: none; border-radius: 5px;">
+                    <table class="table1" style="width: 98%; margin-bottom: 10px; border: 1px solid rgb(22, 22, 22); border-radius: 5px;" cellspacing="0" cellpadding="0">
+                        <tr style="width: 100%; height: 30px; background-color:#F2F2F2;">
                             <td>账号</td>
                             <td>姓名</td>
                             <td>年龄</td>
@@ -81,37 +81,37 @@
                     </table>
                 </div>
             </div>
-            <div class="right42" style="width: 400px">
-                <form action="javascript:void(0)">
-                    <div style="float:left;"><input class="input-group search" style="width: 100px; height: 30px;" type="text" placeholder="输入用户信息查找"></div>
+            <div class="right42" style="width: 400px; height: 30px;">
+                <form action="javascript:void(0)" style="width: 100%; height: 30px;">
+                    <div style="float:left;"><input class="input-group search" style="margin-left: 0; margin-top: 0; width: 150px; height: 30px; float: left" type="text" placeholder="输入用户信息查找"></div>
                     <div style="float:left;">
-                        <select name="dept" id="dept" style="width: 100px; height: 34px; border: 1px solid; color: #bbb; border-radius: 5px; margin-left: 20px;"></select>
+                        <select name="dept" id="dept" style="width: 100px; height: 34px; border: 1px solid; color: #bbb; border-radius: 5px; margin-left: 20px; background: rgb(33, 33, 33)"></select>
                     </div>
-                    <div class="b1" style="margin-left: 20px; font-size: 100%;"><button style="font-size: 16px; width: 100%; height: 100%; border:none; border-radius: 2px;background: none;float: right" id="b1">搜索</button></div>
+                    <div class="b1" style="margin-left: 20px; margin-top: 2px; font-size: 100%;border: none; border-radius: 2px;"><button style="border: none; font-size: 16px; color: #aaaaaa; width: 100%; height: 100%; border:none; border-radius: 2px;background: rgb(22, 22, 22);float: right" id="b1">搜索</button></div>
                 </form>
             </div>
         </div>
         <div class="right5">
-            <div style="width: 240px; height: 30px; margin-top: 100px; margin-left: 40px;">
-                    <input placeholder="输入账号" type="text" name="userCode" class="input-group in1" style=" height:30px; margin-top: 20px;">
-                    <input placeholder="输入密码" type="text" name="userPassword" class="input-group in2" style="height:30px; margin-top: 20px;">
-                    <input placeholder="输入姓名（选填）" type="text" name="userName" class="input-group in3" style="height:30px; margin-top: 20px;">
-                    <input placeholder="输入电话（选填）" type="text" name="phone" class="input-group in4" style="height:30px; margin-top: 20px;">
-                    <input placeholder="输入地址（选填）" type="text" name="address" class="input-group in5" style="height:30px; margin-top: 20px;">
-                    <select class="in6" style="margin-top: 20px; height:30px;">
+            <div style="width: 500px; height: 600px; margin: auto; position: absolute; top: 50px; left: 0; right: 0; bottom: 0; background:rgb(33, 33, 33); border: 1px solid rgb(22, 22, 22); border-radius: 6px; box-shadow: 7px 7px 5px rgb(22, 22, 22)">
+                    <input placeholder="输入账号" type="text" name="userCode" class="input-group in1">
+                    <input placeholder="输入密码" type="text" name="userPassword" class="input-group in2" style="height:30px; margin-top: 30px;">
+                    <input placeholder="输入姓名（选填）" type="text" name="userName" class="input-group in3" style="height:30px; margin-top: 30px;">
+                    <input placeholder="输入电话（选填）" type="text" name="phone" class="input-group in4" style="height:30px; margin-top: 30px;">
+                    <input placeholder="输入地址（选填）" type="text" name="address" class="input-group in5" style="height:30px; margin-top: 30px;">
+                    <select class="in6" style="width: 255px; margin-top: 30px; margin-left: 125px; height:30px; background: rgb(33, 33, 33); color: #aaaaaa">
                         <option value="0">选择性别</option>
                         <option value="2">男</option>
                         <option value="1">女</option>
                     </select>
                     <div class="add_usr" style="margin-top: 20px; margin-left: auto">
-                        <button class="adduser" style=" width: 100%; height:100%; font-size: 100%;">提交</button>
+                        <button class="adduser" style=" width: 100%; height:100%; font-size: 100%;color: #aaaaaa">提交</button>
                     </div>
             </div>
         </div>
         <div class="right6 record-model">
-            <div>
-                <div class="table" style="margin-top: 100px; height: 500px; overflow-y: scroll; display: none">
-                    <table class="table1" style="width: 95%; border: 1px;" cellspacing="0" cellpadding="0">
+            <div style="height: 58%;">
+                <div class="table" style="height: 100%; border: 1px rgb(22, 22, 22); border-radius: 5px; margin-top: 100px; margin-left: 20px; overflow-y: scroll; display: none;">
+                    <table class="table1" style="width: 95%; border: 1px solid rgb(22, 22, 22); border-radius: 5px; margin-bottom: 10px;" cellspacing="0" cellpadding="0">
                         <tr style="width: 100%; height: 30px; border: 1px; background-color:#F2F2F2;">
                             <td id="td0">id</td>
                             <td id="td1">产品编码</td>
@@ -130,37 +130,37 @@
             <div style="width: 300px; float:left; margin-top: 20px;">
                 <form action="javascript:void(0)">
                     <div class="b1" style="margin-left: 20px;" >
-                        <button style="font-size: 100%;width: 100%; height: 100%; border:none; border-radius: 2px;background: none;" id="b2">今日</button>
-                        <button style="font-size: 100%;width: 100%; height: 100%; border:none; border-radius: 2px;background: none; display: none" id="b5">今日</button>
+                        <button style="font-size: 100%;width: 100%; height: 100%; border:none; border-radius: 2px;" id="b2">今日</button>
+                        <button style="font-size: 100%;width: 100%; height: 100%; border:none; border-radius: 2px; display: none" id="b5">今日</button>
                     </div>
                     <div class="b1" style="margin-left: 20px;">
-                        <button style=" font-size: 100%;width: 100%; height: 100%; border:none; border-radius: 2px;background: none;" id="b3">本周</button>
-                        <button style="font-size: 100%;width: 100%; height: 100%; border:none; border-radius: 2px;background: none; display: none" id="b6">本周</button>
+                        <button style=" font-size: 100%;width: 100%; height: 100%; border:none; border-radius: 2px;" id="b3">本周</button>
+                        <button style="font-size: 100%;width: 100%; height: 100%; border:none; border-radius: 2px; display: none" id="b6">本周</button>
                     </div>
                     <div class="b1" style="margin-left: 20px;">
-                        <button style=" font-size: 100%;width: 100%; height: 100%; border:none; border-radius: 2px;background: none;" id="b4">本月</button>
-                        <button style="font-size: 100%;width: 100%; height: 100%; border:none; border-radius: 2px;background: none; display: none" id="b7">本月</button>
+                        <button style=" font-size: 100%;width: 100%; height: 100%; border:none; border-radius: 2px;" id="b4">本月</button>
+                        <button style="font-size: 100%;width: 100%; height: 100%; border:none; border-radius: 2px; display: none" id="b7">本月</button>
                     </div>
                 </form>
             </div>
-            <div style="width: 60px; height: 20px;margin-right: 20px; margin-top: 20px; float: left; text-align: center"> 合计：</div><div style="width: 40px; height: 20px; text-align: center; margin-right: 20px; margin-top: 20px; float: left" class="showsum"></div>
-            <div style="margin-left: 100px; margin-top: 20px; float: left; width: 20px;"> 元</div>
+            <div style="width: 60px; height: 20px;margin-right: 20px; margin-top: 20px; float: left; text-align: center; border-radius: 5px; color: #aaaaaa"> 合计：</div><div style="width: 40px; height: 20px; text-align: center; margin-right: 20px; margin-top: 20px; float: left; color: #aaaaaa" class="showsum"></div>
+            <div style="margin-left: 100px; margin-top: 20px; float: left; width: 20px; color: #aaaaaa"> 元</div>
             <div style="width: 750px; margin-top: 80px;">
-                <input id="bill1" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px;" placeholder="产品编码">
-                <input id="bill2" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px;" placeholder="产品名称">
-                <input id="bill3" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px;" placeholder="产品类别">
-                <input id="bill4" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px;" placeholder="单位">
-                <input id="bill5" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px;" placeholder="数量">
-                <input id="bill6" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px;" placeholder="总价">
-                <input id="bill7" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px;" placeholder="提供者id">
-                <button class="base4" style="margin-left: 20px; border: none; font-size: 17px;">添加</button>
+                <input id="bill1" class="input-group" style="float: left; width: 150px; margin-left: 20px; margin-top: 20px; height: 30px;" placeholder="产品编码">
+                <input id="bill2" class="input-group" style="float: left; width: 150px; margin-left: 20px; margin-top: 20px; height: 30px;" placeholder="产品名称">
+                <input id="bill3" class="input-group" style="float: left; width: 150px; margin-left: 20px; margin-top: 20px; height: 30px;" placeholder="产品类别">
+                <input id="bill4" class="input-group" style="float: left; width: 150px; margin-left: 20px; margin-top: 20px; height: 30px;" placeholder="单位">
+                <input id="bill5" class="input-group" style="float: left; width: 150px; margin-left: 20px; margin-top: 20px; height: 30px;" placeholder="数量">
+                <input id="bill6" class="input-group" style="float: left; width: 150px; margin-left: 20px; margin-top: 20px; height: 30px;" placeholder="总价">
+                <input id="bill7" class="input-group" style="float: left; width: 150px; margin-left: 20px; margin-top: 20px; height: 30px;" placeholder="提供者id">
+                <button class="base4" style="margin-left: 40px; margin-top: 20px; border: none; font-size: 17px;">添加</button>
             </div>
         </div>
 
         <div class="right7 record-model">
-            <div>
-                <div class="table" style="margin-top: 100px; height: 500px; overflow-y: scroll; display: none">
-                    <table class="table1" style="width: 95%; border: 1px;" cellspacing="0" cellpadding="0">
+            <div style="height: 75%;">
+                <div class="table" style="width: 95%; margin-left: 20px; margin-top: 100px; height: 100%; overflow-y: scroll; display: none;border: 1px; border-radius: 5px;">
+                    <table class="table1" style="width: 98%; border: 1px solid; border-radius: 5px;" cellspacing="0" cellpadding="0">
                         <tr style="width: 100%; height: 30px; border: 1px; background-color:#F2F2F2;">
                             <td id="td0">id</td>
                             <td id="td1">角色编码</td>
@@ -172,17 +172,17 @@
                     </table>
                 </div>
             </div>
-            <div style="width: 750px; margin-top: 80px;">
-                <input id="role1" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px;" placeholder="角色编码">
-                <input id="role2" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px;" placeholder="角色名称">
-                <button class="base5" style="margin-left: 20px; font-size: 17px;">添加</button>
+            <div style="width: 750px; margin-top: 20px;">
+                <input id="role1" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px; margin-top: 20px;" placeholder="角色编码">
+                <input id="role2" class="input-group" style="float: left; width: 150px; margin-left: 20px; height: 30px; margin-top: 20px;" placeholder="角色名称">
+                <button class="base5" style="margin-top: 20px;margin-left: 20px; font-size: 17px;">添加</button>
             </div>
         </div>
 
         <div class="right8">
-            <div>
-                <div class="table" style="margin-top: 100px; height: 500px; overflow-y: scroll; display: none">
-                    <table class="table1" style="width: 95%; border: 1px;" cellspacing="0" cellpadding="0">
+            <div style="height: 57%;">
+                <div class="table" style="margin-top: 100px; height: 100%; overflow-y: scroll; display: none; border: 1px; border-radius: 5px;">
+                    <table class="table1" style="width: 95%; border: 1px solid; border-radius: 5px;" cellspacing="0" cellpadding="0">
                         <tr style="width: 100%; height: 30px; border: 1px; background-color:#F2F2F2;">
                             <td id="td0">id</td>
                             <td id="td1">部门编码</td>
@@ -196,17 +196,17 @@
                 </div>
             </div>
             <div style="width: 750px; margin-top: 80px;">
-                <input id="dept1" class="input-group" style="float: left; width: 200px; margin-left: 20px; height: 30px;" placeholder="部门编码">
-                <input id="dept2" class="input-group" style="float: left; width: 200px; margin-left: 20px; height: 30px;" placeholder="部门名称">
-                <input id="dept3" class="input-group" style="float: left; width: 200px; margin-left: 20px; height: 30px;" placeholder="部门主管">
-                <input id="dept4" class="input-group" style="float: left; width: 200px; margin-left: 20px; height: 30px;" placeholder="部门电话">
-                <button class="base6" style="margin-left: 20px; border: none; font-size: 17px;">添加</button>
+                <input id="dept1" class="input-group" style="float: left; width: 200px; margin-left: 20px; height: 30px; margin-top: 20px;" placeholder="部门编码">
+                <input id="dept2" class="input-group" style="float: left; width: 200px; margin-left: 20px; height: 30px; margin-top: 20px;" placeholder="部门名称">
+                <input id="dept3" class="input-group" style="float: left; width: 200px; margin-left: 20px; height: 30px; margin-top: 20px;" placeholder="部门主管">
+                <input id="dept4" class="input-group" style="float: left; width: 200px; margin-left: 20px; height: 30px; margin-top: 20px;" placeholder="部门电话">
+                <button class="base6" style="margin-left: 60px; border: none; font-size: 17px; margin-top: 20px;">添加</button>
             </div>
         </div>
         <div class="right9" style="height: 100%;">
             <div style="height: 85%;">
                 <div class="table" style="margin-top: 100px; height: 100%; display: none; color: #aaaaaa;">
-                    <table class="fsdffs2" style="background: rgb(22, 22, 22); width: 95%; border: 1px;margin: auto; border: 1px solid #222020; width: 95%;" cellspacing="0" cellpadding="0">
+                    <table class="fsdffs2" style="background: rgb(22, 22, 22); width: 95%; border-radius: 5px;margin: auto; border: 1px solid #222020; box-shadow: 7px 7px 5px rgb(22, 22, 22);" cellspacing="0" cellpadding="0">
                         <tr style="width: 100%; height: 30px; background-color:#F2F2F2;" cellspacing="0" cellpadding="0">
                             <td><div style="margin: auto"><a class="pro1" href="javascript:void(0);" onclick="getalarm(1, 1)" style="color: #aaaaaa;">未处理</a></div></td>
                             <td><div><a class="pro2" href="javascript:void(0);" onclick="getalarm(2, 1)" style="color: #aaaaaa">已处理</a></div></td>
@@ -215,7 +215,7 @@
                         </tr>
                     </table>
                     <div style="height: 80%;">
-                    <table class="fsdffs" style="width: 95%; border: 1px;" cellspacing="0" cellpadding="0">
+                    <table class="fsdffs" style="width: 95%; background: rgb(22, 22, 22); border: 1px solid #222020; border-radius: 5px; box-shadow: 7px 7px 5px rgb(22, 22, 22);" cellspacing="0" cellpadding="0">
                         <tr>
                             <td id="td-1">选择</td>
                             <td id="td0" style="margin-bottom: 1px;">id</td>
@@ -223,7 +223,7 @@
                             <td id="td2">设备编号</td>
                             <td id="td3">设备名称</td>
                             <td id="td4">报警日期</td>
-                            <td id="td5">报警类型</td>
+                            <td id="td5" style="width: 10%;">报警类型</td>
                             <td id="td6" style="width: 20%">操作</td>
                         </tr>
                     </table>
@@ -236,7 +236,7 @@
                             <input type="text" name="usr" value="{{ userCode }}" style="display: none">
                             <input type="password" name="pwd" value="{{ userPassword }}" style="display: none">
                             <div style="width: 150px; float: left; margin-left: 20px;">
-                                <select class="select-multiop" style="width: 100%; float: left; text-align: center">
+                                <select class="select-multiop" style="width: 100%; float: left; text-align: center; background: rgb(33, 33, 33); color: #aaaaaa">
                                     <option value="0">选择批量操作</option>
                                     <option value="1">批量删除</option>
                                     <option value="2">批量设置正常</option>
@@ -244,7 +244,7 @@
                                 </select>
                             </div>
                             <div style="width: 50px; height: 30px; float: left; margin-left: 20px; margin-top: 2px;">
-                            <input type="submit" style="background: gray; color: white; border: 1px solid #676363; border-radius: 2px; width: 100%; height: 100%; font-size: 14px; ">
+                            <input type="submit" style="background: rgb(22, 22, 22); color: white; border: 1px solid rgb(22, 22, 22); border-radius: 2px; width: 100%; height: 100%; font-size: 14px; color: #aaaaaa">
                         </div>
                         </form>
                     </div>
@@ -253,7 +253,7 @@
                             <a class="last" onclick="last()" href="javascript:void(0)" style="color: dodgerblue; float: left;">
                                 上一页
                             </a><br>
-                            <div style="margin: auto; width:60px; height:30px;"><select onchange="getalarm(parseInt(document.getElementsByClassName('type')[0].textContent), select.selectedIndex+1)" id="select-page" style="width: 100%; height: 100%;"></select></div>
+                            <div style="margin: auto; width:60px; height:30px;"><select onchange="getalarm(parseInt(document.getElementsByClassName('type')[0].textContent), select.selectedIndex+1)" id="select-page" style="width: 100%; height: 100%; background: rgb(33,33,33); color: #aaaaaa"></select></div>
                             <a class="next" onclick="next()" href="javascript:void(0)" style="color: dodgerblue; float: right;">
                                 下一页
                             </a>
@@ -277,13 +277,14 @@
         <div style="position: absolute; right: 0;top: 0; height: 100px;width: 100px;">
             <button class="closepic" style="width: 100%; height: 100%; border: none; background: none;"><div class="error"></div></button>
         </div>
-        <div class="judge" style="width: 600px; margin: auto; position: absolute;bottom: 100px; left: 0; right: 0">
-            <div style="float: left; margin-left: 100px; width: 100px; height: 30px;">
+        <div class="judge" style="width: 600px; height: 100px; margin: auto; position: absolute;bottom: 100px; left: 0; right: 0">
+            <div style="margin: auto; margin-top: 40px; width: 300px;height: 30px;"><input style=" width: 100%; height: 100%; font-size: 16px;" type="text" class="remarks" placeholder="备注" ></div>
+            <div style="float: left; margin-left: 100px; width: 100px; height: 30px; margin-top: 20px;">
                 <button class="yes" style="width: 100%; height: 100%; font-size: 17px;">
                     正常
                 </button>
             </div>
-            <div style="float: right; margin-right: 100px; width: 100px;height: 30px;">
+            <div style="float: right; margin-right: 100px; width: 100px;height: 30px; margin-top: 20px;">
                 <button class="danger" style="width: 100%; height: 100%; font-size: 17px;">
                     异常
                 </button>
@@ -443,6 +444,7 @@
         document.getElementsByClassName('showdetail')[0].style = "position: fixed; left: -9999px; height: 500px; width: 300px;"
         ul = document.getElementsByClassName('showdetail')[0].childNodes
         for(i=ul.length-1;i>=0;i--){document.getElementsByClassName('showdetail')[0].removeChild(ul[i]);}
+        document.getElementsByClassName('remarks')[0].value = ''
 
     })
     $(".yes").click(function(){
@@ -456,11 +458,13 @@
 
     function process(type, id){
         usr = localStorage.getItem('usr');
+        remarks = $(".remarks").val();
+
         $.ajax({
             url: '/processalarm/',
             type: 'POST',
             dataType: 'json',
-            data: {'id': id, 'type': type, 'usr': usr},
+            data: {'id': id, 'type': type, 'usr': usr, 'remarks': remarks},
             success: function (data){
                 $(".message-pre").text('请求成功');
                 $(".message-box").text('处理成功');
@@ -471,6 +475,7 @@
                 getalarm(1, nowpage)
                 document.body.removeChild(document.getElementsByTagName('img')[0]);
                 document.getElementsByClassName('cover')[0].style.display = 'none';
+                document.getElementsByClassName('remarks')[0].value = ''
             }
         })
     }
@@ -508,7 +513,7 @@
             success: function (data){
                 select = document.getElementsByClassName('select-multiop')[0]
                 select.options[0].selected = true;
-                
+
                 content = data.content;
                 document.getElementsByClassName('pages')[0].textContent = data.pages;
                 if(data.pages > 1 && page < data.pages){document.getElementsByClassName('next')[0].style.display = 'block';}
@@ -619,6 +624,7 @@
                                         else if(j===6){str = "处理状态:" + "已处理"}
                                         else if(j===7){console.log(content[j], typeof(content[j])); str = "处理结果:"; if(content[j]===0){str += "正常";}else if (content[j]===1){str += "异常"}}
                                         else if(j===8){str = "处理人:" +content[j]}
+                                        else if(j===9){str = "备注:" + content[j]}
                                         let li = document.createElement('li')
                                         li.innerHTML = str
                                         li.style = 'color: white; font-size: 16px; margin-top: 10px;'
@@ -677,10 +683,12 @@
         if(type===0){
             $(".yes").css("display","none");
             $(".danger").css("display","none");
+            $(".remarks").css("display","none");
         }
         else if(type===1){
             $(".yes").show()
             $(".danger").show()
+            $(".remarks").show()
         }
     }
 
@@ -809,8 +817,9 @@
                                     input.style.height = '100%'
                                     input.style.fontSize = '17px'
                                     input.style.background = 'none'
-                                    input.style.border = 'none';
-                                    input.style.color = '#000000';
+                                    input.style.border = '1px solid';
+                                    input.style.borderRadius = '5px'
+                                    input.style.color = '#aaaaaa';
                                     input.type = 'text'
                                     input.name = 'data'
                                     form.appendChild(input)
@@ -883,11 +892,12 @@
                                 btn.style.float = 'left';
                                 btn.style.border = 'none';
                                 btn.style.borderRadius = '3px';
-                                btn.style.boxShadow = '2px 2px gray';
+                                {#btn.style.boxShadow = '2px 2px gray';#}
                                 btn.style.textAlign = 'center';
                                 btn.textContent = '删除';
                                 btn.style.fontSize = '100%';
-                                btn.style.background = 'goldenrod';
+                                btn.style.background = 'rgb(33, 33, 33)';
+                                btn.style.color = 'red'
                                 btn.style.marginLeft = '2%';
                                 btn.onclick = function (){
                                     this.style.display = 'none';
@@ -899,11 +909,12 @@
                                     btn2.style.float = 'left';
                                     btn2.style.border = 'none';
                                     btn2.style.borderRadius = '3px';
-                                    btn2.style.boxShadow = '2px 2px gray';
+                                    {#btn2.style.boxShadow = '2px 2px gray';#}
                                     btn2.textContent = '确认';
                                     btn2.style.textAlign = 'center';
                                     btn2.style.fontSize = '100%';
-                                    btn2.style.background = 'red';
+                                    btn2.style.background = 'rgb(33, 33, 33)';
+                                    btn2.style.color = 'red'
                                     btn2.style.marginLeft = '2%';
                                     td.appendChild(btn2);
                                     let btn3 = document.createElement('button')
@@ -914,11 +925,12 @@
                                     btn3.style.float = 'left';
                                     btn3.style.border = 'none';
                                     btn3.style.borderRadius = '3px';
-                                    btn3.style.boxShadow = '2px 2px gray';
+                                    {#btn3.style.boxShadow = '2px 2px gray';#}
                                     btn3.textContent = '取消';
                                     btn3.style.textAlign = 'center';
                                     btn3.style.fontSize = '100%';
-                                    btn3.style.background = 'green';
+                                    btn3.style.background = 'rgb(33, 33, 33';
+                                    btn3.style.color = '#aaaaaa'
                                     btn3.style.marginLeft = '2%';
                                     td.appendChild(btn3);
                                     btn3.onclick = function (){
@@ -1051,7 +1063,10 @@
                                     input.style.fontSize = '17px'
                                     input.style.background = 'none'
                                     input.style.border = 'none';
-                                    input.style.color = '#000000';
+                                    input.style.borderRadius = '5px';
+                                    input.style.border = '1px solid';
+
+                                    input.style.color = '#aaaaaa';
                                     input.type = 'text'
                                     input.name = 'data'
                                     form.appendChild(input)
@@ -1124,11 +1139,12 @@
                                 btn.style.float = 'left';
                                 btn.style.border = 'none';
                                 btn.style.borderRadius = '3px';
-                                btn.style.boxShadow = '2px 2px gray';
+                                {#btn.style.boxShadow = '2px 2px gray';#}
                                 btn.style.textAlign = 'center';
                                 btn.textContent = '删除';
                                 btn.style.fontSize = '100%';
-                                btn.style.background = 'goldenrod';
+                                btn.style.background = 'rgb(33, 33, 33)';
+                                btn.style.color = 'red'
                                 btn.style.marginLeft = '2%';
                                 btn.onclick = function (){
                                     this.style.display = 'none';
@@ -1140,11 +1156,12 @@
                                     btn2.style.float = 'left';
                                     btn2.style.border = 'none';
                                     btn2.style.borderRadius = '3px';
-                                    btn2.style.boxShadow = '2px 2px gray';
+                                    {#btn2.style.boxShadow = '2px 2px gray';#}
                                     btn2.textContent = '确认';
                                     btn2.style.textAlign = 'center';
                                     btn2.style.fontSize = '100%';
-                                    btn2.style.background = 'red';
+                                    btn2.style.background = 'rgb(33, 33, 33)';
+                                    btn2.style.color = 'red'
                                     btn2.style.marginLeft = '2%';
                                     td.appendChild(btn2);
                                     let btn3 = document.createElement('button')
@@ -1155,11 +1172,12 @@
                                     btn3.style.float = 'left';
                                     btn3.style.border = 'none';
                                     btn3.style.borderRadius = '3px';
-                                    btn3.style.boxShadow = '2px 2px gray';
+                                    {#btn3.style.boxShadow = '2px 2px gray';#}
                                     btn3.textContent = '取消';
                                     btn3.style.textAlign = 'center';
                                     btn3.style.fontSize = '100%';
-                                    btn3.style.background = 'green';
+                                    btn3.style.background = 'rgb(33, 33, 33';
+                                    btn3.style.color = '#aaaaaa'
                                     btn3.style.marginLeft = '2%';
                                     td.appendChild(btn3);
                                     btn3.onclick = function (){
@@ -1470,9 +1488,11 @@
                                     input.style.fontSize = '17px'
                                     input.style.background = 'none'
                                     input.style.border = 'none';
-                                    input.style.color = '#000000';
+                                    input.style.color = '#aaaaaa';
                                     input.type = 'text'
                                     input.name = 'data'
+                                    input.style.border = '1px solid gray'
+                                    input.style.borderRadius = '5px'
                                     form.appendChild(input)
                                     let usr = document.createElement('input')
                                     usr.type = 'text'
@@ -1539,11 +1559,11 @@
                                 btn.style.float = 'left';
                                 btn.style.border = 'none';
                                 btn.style.borderRadius = '3px';
-                                btn.style.boxShadow = '2px 2px gray';
                                 btn.style.textAlign = 'center';
                                 btn.textContent = '删除';
                                 btn.style.fontSize = '100%';
-                                btn.style.background = 'goldenrod';
+                                btn.style.color = 'red';
+                                btn.style.background = 'rgb(33, 33, 33)';
                                 btn.style.marginLeft = '2%';
                                 btn.onclick = function (){
                                     this.style.display = 'none';
@@ -1555,12 +1575,13 @@
                                     btn2.style.height = '40px';
                                     btn2.style.float = 'left';
                                     btn2.style.border = 'none';
+                                    btn2.style.color = '#e02525'
+                                    btn2.style.background = 'rgb(33, 33, 33)';
                                     btn2.style.borderRadius = '3px';
-                                    btn2.style.boxShadow = '2px 2px gray';
+                                    {#btn2.style.boxShadow = '2px 2px gray';#}
                                     btn2.textContent = '确认';
                                     btn2.style.textAlign = 'center';
-                                    btn2.style.fontSize = '100%';
-                                    btn2.style.background = 'red';
+                                    btn2.style.fontSize = '100%'
                                     btn2.style.marginLeft = '2%';
                                     td.appendChild(btn2);
                                     let btn3 = document.createElement('button')
@@ -1570,12 +1591,13 @@
                                     btn3.style.height = '40px';
                                     btn3.style.float = 'left';
                                     btn3.style.border = 'none';
+                                    btn3.style.color = '#aaaaaa'
                                     btn3.style.borderRadius = '3px';
-                                    btn3.style.boxShadow = '2px 2px gray';
+                                    {#btn3.style.boxShadow = '2px 2px gray';#}
                                     btn3.textContent = '取消';
                                     btn3.style.textAlign = 'center';
                                     btn3.style.fontSize = '100%';
-                                    btn3.style.background = 'green';
+                                    btn3.style.background = 'rgb(33, 33, 33)';
                                     btn3.style.marginLeft = '2%';
                                     td.appendChild(btn3);
                                     btn3.onclick = function (){
@@ -1620,7 +1642,6 @@
                                         if(f===1){
                                             pp.removeChild(this.parentNode.parentNode);
                                         }
-
                                 };
                                 };
                                 td.style.textAlign = 'center'
@@ -1748,9 +1769,10 @@
                                         if(i % 2 == 0){
                                             select.style.background = "rgb(231,229,229)";
                                         }
-                                        select.style.color = 'black';
-                                        select.style.border = 'none';
-                                        select.style.borderRadius = '3px';
+                                        select.style.color = '#aaaaaa';
+                                        select.style.border = '1px solid #aaaaaa';
+                                        select.style.borderRadius = '5px';
+                                        select.style.background = 'rgb(33, 33, 33)'
                                         rolelist = data.rolelist
                                         for(k=0;k<rolelist.length;k++){
                                             let option = document.createElement('option')
@@ -1772,9 +1794,10 @@
                                         if(i % 2 == 0){
                                             select.style.background = "rgb(231,229,229)";
                                         }
-                                        select.style.color = 'black';
-                                        select.style.border = 'none';
-                                        select.style.borderRadius = '3px';
+                                        select.style.color = '#aaaaaa';
+                                        select.style.border = '1px solid #aaaaaa';
+                                        select.style.borderRadius = '5px';
+                                        select.style.background = 'rgb(33, 33, 33)'
                                         deptlist = data.deptlist
                                         let option = document.createElement('option')
                                         option.textContent = '选择部门'
@@ -1803,11 +1826,12 @@
                                 btn.style.float = 'left';
                                 btn.style.border = 'none';
                                 btn.style.borderRadius = '3px';
-                                btn.style.boxShadow = '2px 2px gray';
+                                {#btn.style.boxShadow = '2px 2px gray';#}
+                                btn.style.color = '#e02525';
                                 btn.style.textAlign = 'center';
                                 btn.textContent = '删除';
                                 btn.style.fontSize = '100%';
-                                btn.style.background = 'goldenrod';
+                                btn.style.background = 'rgb(33, 33, 33)';
                                 btn.style.marginLeft = '2%';
                                 btn.onclick = function (){
                                     this.style.display = 'none';
@@ -1820,11 +1844,12 @@
                                     btn2.style.float = 'left';
                                     btn2.style.border = 'none';
                                     btn2.style.borderRadius = '3px';
-                                    btn2.style.boxShadow = '2px 2px gray';
+                                    {#btn2.style.boxShadow = '2px 2px gray';#}
+                                    btn2.style.color = '#e02525'
                                     btn2.textContent = '确认';
                                     btn2.style.textAlign = 'center';
                                     btn2.style.fontSize = '100%';
-                                    btn2.style.background = 'red';
+                                    btn2.style.background = 'rgb(33, 33, 33)';
                                     btn2.style.marginLeft = '2%';
                                     td.appendChild(btn2);
                                     let btn3 = document.createElement('button')
@@ -1835,11 +1860,12 @@
                                     btn3.style.float = 'left';
                                     btn3.style.border = 'none';
                                     btn3.style.borderRadius = '3px';
-                                    btn3.style.boxShadow = '2px 2px gray';
+                                    btn3.style.color = '#aaaaaa'
+                                    {#btn3.style.boxShadow = '2px 2px gray';#}
                                     btn3.textContent = '取消';
                                     btn3.style.textAlign = 'center';
                                     btn3.style.fontSize = '100%';
-                                    btn3.style.background = 'green';
+                                    btn3.style.background = 'rgb(33, 33, 33)';
                                     btn3.style.marginLeft = '2%';
                                     td.appendChild(btn3);
                                     btn3.onclick = function (){
@@ -1960,14 +1986,21 @@
                                         if(i % 2 == 0){
                                             select.style.background = 'rgb(231,229,229)';
                                         }
-                                        select.style.color = 'black';
-                                        select.style.border = 'none';
-                                        select.style.borderRadius = '3px';
+                                        select.style.color = '#aaaaaa';
+                                        select.style.border = '1px solid #aaaaaa';
+                                        select.style.borderRadius = '5px';
+                                        select.style.background = 'rgb(33, 33, 33)';
                                         select.style.textAlign = 'center'
-                                        select.options.add(new Option('系统管理员', 1));
-                                        select.options.add(new Option('经理', 2));
-                                        select.options.add(new Option('普通员工', 3));
-                                        select.options[list[i][j]-1].selected = true;
+                                        rolelist = data.rolelist
+                                        for(k=0;k<rolelist.length;k++){
+                                            let option = document.createElement('option')
+                                            option.textContent = rolelist[k][0]
+                                            option.value = rolelist[k][1]
+                                            select.appendChild(option)
+                                            if(list[i][j] === parseInt(option.value)){
+                                                option.selected = 'selected'
+                                            }
+                                        }
                                         td.appendChild(select);
                                         
                                     }
@@ -1980,9 +2013,10 @@
                                         if(i % 2 == 0){
                                             select.style.background = "rgb(231,229,229)";
                                         }
-                                        select.style.color = 'black';
-                                        select.style.border = 'none';
-                                        select.style.borderRadius = '3px';
+                                        select.style.color = '#aaaaaa';
+                                        select.style.border = '1px solid #aaaaaa';
+                                        select.style.borderRadius = '5px';
+                                        select.style.background = 'rgb(33, 33, 33)'
                                         deptlist = data.deptlist
                                         let option = document.createElement('option')
                                         option.textContent = '选择部门'
@@ -2002,40 +2036,6 @@
                                     tr.appendChild(td);
                                 }
                                 let td = document.createElement('td')
-                                {#let btn4 = document.createElement('button')#}
-                                {#btn4.className = 'deletes';#}
-                                {#btn4.id = 'delete'+i;#}
-                                {#btn4.style.width = '45%';#}
-                                {#btn4.style.height = '80%';#}
-                                {#btn4.style.float = 'left';#}
-                                {#btn4.style.border = 'none';#}
-                                {#btn4.style.borderRadius = '3px';#}
-                                {#btn4.style.boxShadow = '2px 2px gray';#}
-                                {#btn4.textContent = '充值';#}
-                                {#btn4.style.textAlign = 'center';#}
-                                {#btn4.style.fontSize = '100%';#}
-                                {#btn4.style.background = 'orange';#}
-                                {#btn4.style.marginLeft = '2%';#}
-                                {#td.appendChild(btn4);#}
-                                {#btn4.onclick = function (){#}
-                                {#    $(".givememoney").show()#}
-                                {#    var me = this.parentNode.parentNode.childNodes;#}
-                                {#    // for(i=0;i<me.length;i++){#}
-                                {#    //     console.log(me[i].textContent)#}
-                                {#    // }#}
-                                {#    var div = document.getElementsByClassName('g1')[0];#}
-                                {#        let d = document.createElement('div')#}
-                                {#        d.textContent = me[0].textContent;#}
-                                {#        div.appendChild(d);#}
-                                {#    var div2 = document.getElementsByClassName('g2')[0];#}
-                                {#        let d2 = document.createElement('div')#}
-                                {#        d2.textContent = me[1].textContent;#}
-                                {#        div2.appendChild(d2);#}
-                                {#    var div3 = document.getElementsByClassName('g3')[0];#}
-                                {#        let d3 = document.createElement('div')#}
-                                {#        d3.textContent = me[3].textContent;#}
-                                {#        div3.appendChild(d3);#}
-                                {# #}
                                 let btn = document.createElement('button')
                                 btn.className = 'deletes';
                                 btn.id = 'delete'+i;
@@ -2044,11 +2044,12 @@
                                 btn.style.float = 'left';
                                 btn.style.border = 'none';
                                 btn.style.borderRadius = '3px';
-                                btn.style.boxShadow = '2px 2px gray';
+                                {#btn.style.boxShadow = '2px 2px gray';#}
                                 btn.textContent = '删除';
                                 btn.style.textAlign = 'center';
                                 btn.style.fontSize = '100%';
-                                btn.style.background = 'goldenrod';
+                                btn.style.color = '#e02525'
+                                btn.style.background = 'rgb(33, 33, 33)';
                                 btn.onclick = function (){
                                     btn.style.display = 'none';
                                     {#btn4.style.display = 'none';#}
@@ -2060,11 +2061,12 @@
                                     btn2.style.float = 'left';
                                     btn2.style.border = 'none';
                                     btn2.style.borderRadius = '3px';
-                                    btn2.style.boxShadow = '2px 2px gray';
+                                    {#btn2.style.boxShadow = '2px 2px gray';#}
                                     btn2.textContent = '确认';
                                     btn2.style.textAlign = 'center';
                                     btn2.style.fontSize = '100%';
-                                    btn2.style.background = 'red';
+                                    btn2.style.color = '#e02525'
+                                    btn2.style.background = 'rgb(33, 33, 33)';
                                     btn2.style.marginLeft = '2%';
                                     td.appendChild(btn2);
                                     let btn3 = document.createElement('button')
@@ -2075,11 +2077,12 @@
                                     btn3.style.float = 'left';
                                     btn3.style.border = 'none';
                                     btn3.style.borderRadius = '3px';
-                                    btn3.style.boxShadow = '2px 2px gray';
+                                    {#btn3.style.boxShadow = '2px 2px gray';#}
                                     btn3.textContent = '取消';
                                     btn3.style.textAlign = 'center';
                                     btn3.style.fontSize = '100%';
-                                    btn3.style.background = 'green';
+                                    btn3.style.background = 'rgb(33, 33, 33)'
+                                    btn3.style.color = '#aaaaaa';
                                     btn3.style.marginLeft = '2%';
                                     td.appendChild(btn3);
                                     btn3.onclick = function (){
@@ -2155,7 +2158,6 @@
             )
         }
         )
-
 </script>
 </body>
 </html>

@@ -91,3 +91,4 @@ class alarm(models.Model):
     processResult = models.IntegerField(null=True)
     processor = models.CharField(max_length=20, null=True)
     imgPath=models.CharField(max_length=150)
+    remarks = models.CharField(max_length=200, null=True)

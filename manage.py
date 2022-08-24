@@ -5,7 +5,6 @@ import sys
 import threading
 import WarehouseManagementSystem.server
 
-
 def main():
     t = threading.Thread(target=WarehouseManagementSystem.server.socket_service_image)
     t.daemon = True

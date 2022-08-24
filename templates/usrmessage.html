@@ -44,32 +44,32 @@
         </div>
     </div>
     <div class="right">
-        <div style=" border: 1px black; border-radius: 5px; background: white">
-        <div class="base1" style="text-align: center">
+        <div style=" border: 1px black; border-radius: 5px; background: rgb(33, 33, 33); width: 1000px; height: 600px; margin: auto; position: absolute; left: 100px; top: 100px; right: 0; bottom: 0; box-shadow: 7px 7px 5px rgb(22, 22, 22)">
+        <div class="base1" style="text-align: center; margin-left: 90px;">
             姓名：{{ userName }}
             <form action="/user/" method="post" style="float:right; margin-right: 20px;" onsubmit="change(1, document.getElementById('name').value)">
                 <input name="pwd" value="{{ userPassword }}" type="password" style="display: none">
                 <input name="usr" value="{{ userCode }}" type="text" style="display: none">
-                <input type="text" id="name" name="name" style="width: 80px; height: 30px;font-size: 16px; border-radius: 2px;border-width: 1px;">
+                <input type="text" id="name" name="name" style="width: 80px; height: 30px;font-size: 16px; border-radius: 2px;border-width: 1px;  background: rgb(22, 22, 22); border: 1px solid #aaaaaa; color: #aaaaaa">
                 <input type="submit" value="修改" style="border: 1px; background: none; width: 30px;height: 20px;border-radius: 2px; color: #0000ff">
             </form>
         </div>
         <div class="base1" id="address">
             账号：{{ userCode }}
         </div>
-        <div class="base1">
+        <div class="base1" style="margin-left: 90px;">
             年龄：{{ userAge }}
             <form action="/user/" method="post" style="float:right; margin-right: 20px;" onsubmit="ChangeAge()">
                 <input name="pwd" value="{{ userPassword }}" type="password" style="display: none">
                 <input name="usr" value="{{ userCode }}" type="text" style="display: none">
-                <input type="date" id="age">
-                <input type="submit" value="修改" style="border: 1px; background: none; width: 30px;height: 20px;border-radius: 2px; color: #0000ff">
+                <input type="date" id="age" style="background: rgb(22 ,22 ,22); color: #cccccc;">
+                <input type="submit" value="修改" style="border: 1px; width: 30px;height: 20px;border-radius: 2px;background: none; color: #0000ff; ">
             </form>
         </div>
         <div class="base1">
-        <div id="gender" style="display: none">{{ gender }}</div>
+        <div id="gender" style="display: none;">{{ gender }}</div>
         性别：
-            <select id="changegender" onchange="ChangeGender()" style="border: none; color: black; font-size: 15px; width: 20px;">
+            <select id="changegender" onchange="ChangeGender()" style="color: black; font-size: 15px; width: 40px; background: rgb(22, 22, 22); border: 1px solid #aaaaaa; color: #aaaaaa">
                 <option value="1" {% if gender == 1 %}selected="selected"{% endif %}>
                     女
                 </option>
@@ -78,12 +78,12 @@
                 </option>
             </select>
         </div>
-        <div class="base1">
+        <div class="base1" style="margin-left: 90px;">
             电话：{{ phone }}
             <form action="/user/" method="post" style="float:right; margin-right: 20px;" onsubmit="change(3, document.getElementById('phone').value)">
                 <input name="pwd" value="{{ userPassword }}" type="password" style="display: none">
                 <input name="usr" value="{{ userCode }}" type="text" style="display: none">
-                <input type="text" id="phone" name="address" style="width: 80px; height: 30px;font-size: 16px; border-radius: 2px;border-width: 1px;">
+                <input type="text" id="phone" name="address" style="width: 80px; height: 30px;font-size: 16px; border-radius: 2px;border-width: 1px; border: 1px solid #aaaaaa; background: rgb(22, 22, 22); color: #aaaaaa">
                 <input type="submit" value="修改" style="border: 1px; background: none; width: 30px;height: 20px;border-radius: 2px; color: #0000ff">
             </form>
         </div>
@@ -97,30 +97,30 @@
                 系统管理员
             {% endif %}
         </div>
-        <div class="base1">
+        <div class="base1" style="margin-left: 90px;">
             地址：{{ address }}
             <form action="/user/" method="post" style="float:right; margin-right: 20px;" onsubmit="change(2, document.getElementById('afaddress').value)">
                 <input name="pwd" value="{{ userPassword }}" type="password" style="display: none">
                 <input name="usr" value="{{ userCode }}" type="text" style="display: none">
-                <input type="text" id="afaddress" name="address" style="width: 80px; height: 30px;font-size: 16px; border-radius: 2px;border-width: 1px;">
+                <input type="text" id="afaddress" name="address" style="width: 80px; height: 30px;font-size: 16px; border-radius: 2px;border-width: 1px; background: rgb(22, 22, 22); color: #aaaaaa">
                 <input type="submit" value="修改" style="border: 1px; background: none; width: 30px;height: 20px;border-radius: 2px; color: #0000ff">
             </form>
         </div>
         </div>
         </div>
     <div class="right3" style="text-align: center">
-        <div style="margin: auto; width: 600px; height: 200px; position: absolute; top: 0; bottom: 0; left: 0;right: 0">
+        <div style="background: rgb(22, 22, 22);border: 1px solid; border-radius: 7px; width: 500px; height: 170px; margin: auto; position: absolute; top: 0; left: 0; right: 0; bottom: 0; box-shadow: 7px 7px 5px rgb(22 ,22, 22)">
             <form action="/user/" onsubmit="return changepwd()" method="post">
                 <input name="pwd" value="{{ userPassword }}" type="password" style="display: none">
                 <input name="usr" value="{{ userCode }}" type="text" style="display: none">
-                <div class="mm">
+                <div class="mm" style="color: #aaaaaa">
                 输入密码：<input name="mima" id="1" class="mima" type="password">
                 </div>
-                <div class="mm">
+                <div class="mm" style="color: #aaaaaa">
                 确认密码：<input name="queren" id="2" class="mima" type="password">
                 </div>
                 <div class="bas">
-                    <input type="submit" style="height: 100%; width: 100%; font-size: 100%; background: none; border: none;" value="修改">
+                    <input type="submit" style="height: 100%; width: 100%; font-size: 100%; background: none; border: none; color: #cccccc" value="修改">
                 </div>
             </form>
         </div>
